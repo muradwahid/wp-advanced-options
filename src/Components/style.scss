@@ -1,0 +1,19 @@
+$primaryColor: #4527a4;
+
+.bPlPanelBody,
+.bPlPopoverContent {
+  .components-range-control {
+    .components-base-control__label {
+      font-size: 13px;
+      text-transform: capitalize;
+      margin-bottom: 0;
+    }
+
+    .components-range-control__wrapper {
+      .components-range-control__track,
+      .components-range-control__thumb-wrapper span {
+        background: $primaryColor !important;
+      }
+    }
+  }
+}

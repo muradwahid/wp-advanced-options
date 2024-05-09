@@ -1,0 +1,42 @@
+{
+  "apiVersion": "1",
+  "name": "aog/advanced-options-gb",
+  "title": "Advanced Options Gb",
+  "description": "Description of Advanced Options Gb.",
+  "category": "widgets",
+  "keywords": ["hello", "block", "gutenberg"],
+  "textdomain": "advanced-options-gb",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": ""
+    },
+    "cId": {
+      "type": "string",
+      "default": ""
+    },
+    "content": {
+      "type": "string",
+      "default": "Lorem text should be replaced with real text"
+    },
+    "padding": {
+      "type": "object",
+      "default": {}
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  },
+  "example": {
+    "attributes": {
+      "preview": true,
+      "columns": {
+        "desktop": 1,
+        "tablet": 1,
+        "mobile": 1
+      }
+    }
+  },
+  "editorScript": "file:./../dist/editor.js"
+}

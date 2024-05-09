@@ -1,0 +1,21 @@
+export const getBoxCss = (value) => {
+  return `${value?.top} ${value?.left} ${value?.bottom} ${value?.right}`
+}
+
+export const updateData = (attr, value, ...props) => {
+  if (props.length === 0) {
+    return value;
+  }
+  const [currentProp, ...remainingProps] = props;
+  if (remainingProps.length === 0) {
+    return produce(attr, draft => {
+      draft[currentProp] = value;
+    });
+  }
+  return produce(attr, draft => {
+    if (!Object.prototype.hasOwnProperty.call(draft, currentProp)) {
+      draft[currentProp] = {};
+    }
+    draft[currentProp] = dataUpdate(draft[currentProp], value, ...remainingProps);
+  });
+};
