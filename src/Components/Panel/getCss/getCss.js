@@ -1,3 +1,5 @@
+import { produce } from "immer";
+
 export const getBoxCss = (value) => {
   return `${value?.top} ${value?.left} ${value?.bottom} ${value?.right}`
 }
@@ -16,6 +18,10 @@ export const updateData = (attr, value, ...props) => {
     if (!Object.prototype.hasOwnProperty.call(draft, currentProp)) {
       draft[currentProp] = {};
     }
-    draft[currentProp] = dataUpdate(draft[currentProp], value, ...remainingProps);
+    draft[currentProp] = updateData(
+      draft[currentProp],
+      value,
+      ...remainingProps
+    );
   });
 };

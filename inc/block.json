@@ -7,6 +7,30 @@
   "keywords": ["hello", "block", "gutenberg"],
   "textdomain": "advanced-options-gb",
   "attributes": {
+    "advanced":{
+      "type":"object",
+      "default":{
+        "background": {
+          "normal": {
+            "type": "color",
+            "color": "",
+            "gradient": {},
+            "img": {}
+          },
+          "hover": {
+            "type": "color",
+            "color": "",
+            "gradient": {},
+            "img": {}
+          },
+          "hoverType": "normal"
+        },
+        "borderShadow": {
+          "normal": {},
+          "hover": {}
+        }
+      }
+    },
     "align": {
       "type": "string",
       "default": ""

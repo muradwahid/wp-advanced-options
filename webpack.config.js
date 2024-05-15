@@ -14,8 +14,8 @@ module.exports = (env, argv) => {
 	var config = {
 		entry: {
 			editor: './src/editor.js',
-			advanced: './src/advanced.js',
-			'advanced-style': './src/advanced-style.js',
+			// advanced: './src/advanced.js',
+			// 'advanced-style': './src/advanced-style.js',
 			script: './src/script.js',
 		},
 		output: {

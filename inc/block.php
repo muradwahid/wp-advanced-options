@@ -17,7 +17,7 @@ class AOGHelloBlock{
 
 	function render( $attributes ){
 		extract( $attributes );
-
+		
 		wp_enqueue_style( 'aog-hello-style' );
 		wp_enqueue_script( 'aog-hello-script', AOG_DIR_URL . 'dist/script.js', [ 'react', 'react-dom' ], AOG_VERSION, true );
 		wp_set_script_translations( 'aog-hello-script', 'textdomain', AOG_DIR_PATH . 'languages' );

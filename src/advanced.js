@@ -1,14 +1,12 @@
-
 import { createHigherOrderComponent } from "@wordpress/compose";
 import { addFilter } from "@wordpress/hooks";
-import Settings from "./Components/Settings/Settings";
+import { AdvancedOptions } from "./Components";
 
-const ourBlocks = ['hb/hello', "aog/advanced-options-gb"];
-const options = ['backgrou']
+const ourBlocks = ['hb/hello', "aog/advanced-options-gb","b-blocks/hotspot-block"];
+const options = ['background']
 
 const setAttribute = (settings, name) => {
   if (ourBlocks.includes(name)) {
-    console.log(settings)
     // console.log("name")
     settings.attributes = Object.assign(settings.attributes || {}, {
       advanced: {
@@ -24,7 +22,7 @@ const addInspectorControl = createHigherOrderComponent(function (BlockEdit) {
     if (ourBlocks.includes(props.name)) {
       return <>
         <BlockEdit {...props} />
-        <Settings {...props} enabled={options} />
+        {/* <AdvancedOptions {...props} enabled={options} /> */}
       </>
     }
 

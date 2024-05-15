@@ -19,19 +19,19 @@ define( 'AOG_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'AOG_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 
-class AOGPlugin{
-  function __construct(){
-    add_action( 'enqueue_block_editor_assets', [$this, 'enqueueBlockEditorAssets'] );
-    add_action( 'enqueue_block_assets', [$this, 'enqueueBlockAssets'] );
-  }
+// class AOGPlugin{
+//   function __construct(){
+//     add_action( 'enqueue_block_editor_assets', [$this, 'enqueueBlockEditorAssets'] );
+//     add_action( 'enqueue_block_assets', [$this, 'enqueueBlockAssets'] );
+//   }
 
-  function enqueueBlockEditorAssets(){
-    wp_enqueue_script( 'aog-hello-advanced-script', AOG_DIR_URL . 'dist/advanced.js', ['wp-core-data'], AOG_VERSION, true );
-  }
-  function enqueueBlockAssets(){
-    wp_enqueue_script( 'aog-hello-advanced-style-script', AOG_DIR_URL . 'dist/advanced-style.js', [], AOG_VERSION, true );
-  }
-}
-new AOGPlugin();
+//   function enqueueBlockEditorAssets(){
+//     wp_enqueue_script( 'aog-hello-advanced-script', AOG_DIR_URL . 'dist/advanced.js', ['wp-core-data'], AOG_VERSION, true );
+//   }
+//   function enqueueBlockAssets(){
+//     wp_enqueue_script( 'aog-hello-advanced-style-script', AOG_DIR_URL . 'dist/advanced-style.js', [], AOG_VERSION, true );
+//   }
+// }
+// new AOGPlugin();
 
 require_once AOG_DIR_PATH . 'inc/block.php';

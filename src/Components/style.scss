@@ -1,6 +1,6 @@
 $primaryColor: #4527a4;
 
-.bPlPanelBody,
+.bPlAdvPanelBody,
 .bPlPopoverContent {
   .components-range-control {
     .components-base-control__label {
@@ -16,4 +16,76 @@ $primaryColor: #4527a4;
       }
     }
   }
+}
+.bPlLabel,
+.components-unit-control-wrapper label,
+.components-input-control__label,
+.components-number-control label {
+  // font-size: 14px;
+  // font-style: italic;
+  // font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 0 !important;
+  margin-right: auto;
+  margin-bottom: 0;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+.mb5 {
+  margin-bottom: 5px;
+}
+
+.panel-shadow-container {
+  border: 1px solid #b9b9b9;
+  padding: 10px;
+  border-radius: 5px;
+  width: 255px;
+}
+.panel-shadow-container .single-shadow-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.panel-shadow-container
+  .single-shadow-panel
+  .components-base-control.components-input-control.components-number-control {
+  margin: 0px;
+}
+
+.panel-shadow-container .components-base-control.components-toggle-control {
+  margin: 0px;
+}
+
+.bplAdvRangeColor
+  .components-base-control.components-range-control
+  .components-base-control__field
+  .components-range-control__root
+  .components-range-control__wrapper
+  .components-range-control__track,
+.bplAdvRangeColor
+  .components-base-control.components-range-control
+  .components-base-control__field
+  .components-range-control__root
+  .components-range-control__wrapper
+  .components-range-control__thumb-wrapper
+  span {
+  background: #4527a4 !important;
+}
+
+.advExtraMargin .components-base-control {
+  margin-bottom: 10px !important;
+}
+.advExtraMargin .components-number-control {
+  margin-bottom: 0px !important;
+}
+
+.advExtraMargin .components-unit-control-wrapper {
+  margin-bottom: 10px !important;
 }

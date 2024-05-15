@@ -11,13 +11,14 @@ import React from 'react';
  * @param {String} [props.label] - Optional
  * @param {String} [props.value] -Optional
  * @param {Array} [props.colors] - Optional
+ * @param {object} [props.style] - Optional
  * @param {Function} [props.onChange=() => {}]  -Optional
  * @param {JSX.Element} [props.children] - Optional
  * @returns {JSX.Element}
  */
 
 export const PanelColorPicker = ((props) => {
-  const { value, onChange = () => { }, label, colors, tooltip, children } = props;
+  const { value, onChange = () => { }, label, colors, tooltip, children,style } = props;
   const id = Math.floor(Math.random() * 99999999);
   const themeColors = useSelect('core/block-editor').getSettings().colors
   return <div
@@ -26,7 +27,8 @@ export const PanelColorPicker = ((props) => {
       alignItems: 'center',
       justifyContent: 'space-between',
       marginBottom: "10px",
-      gap: "10px"
+      gap: "10px",
+      ...style
     }}
   >
     <style>

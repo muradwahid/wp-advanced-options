@@ -1,0 +1,95 @@
+:root {
+  --primary-color: #4527a4;
+}
+
+/* Dropdown */
+.bPlDropdown .dashicon {
+  margin-right: 0 !important;
+}
+
+.bPlDropdownPopover {
+  min-width: 280px;
+  height: auto;
+  box-sizing: border-box;
+  z-index: 9999;
+}
+
+.bPlDropdownPopover .components-popover__content {
+  min-width: 280px;
+  margin-right: -35px !important;
+  margin-top: -8px;
+  border: none;
+  box-sizing: border-box;
+  box-shadow: 0 3px 15px 0 #4527a480;
+  border-radius: 5px;
+}
+
+.bPlDropdownPopover .dashicon {
+  margin-right: 0 !important;
+}
+
+/* Reset Value */
+.bPlResetVal {
+  min-width: 20px !important;
+  height: 20px;
+  padding: 0 5px !important;
+}
+.bPlResetVal .dashicon {
+  width: 17px;
+  height: 17px;
+  font-size: 17px;
+}
+
+/* tem Action */
+.itemAction .removeItem,
+.duplicateItem {
+  color: #fff;
+  padding: 5px 10px;
+}
+
+.itemAction .removeItem,
+.duplicateItem .dashicon,
+svg {
+  margin-right: 5px;
+  margin-bottom: -2px;
+}
+
+.itemAction .removeItem {
+  background-color: red;
+}
+.itemAction .removeItem .dashicon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.itemAction .duplicateItem {
+  background-color: var(--primary-color);
+}
+
+/* Add Items */
+.addItem {
+  text-align: center;
+  background: var(--primary-color);
+}
+
+.addItem > button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}
+.addItem > button:focus {
+  box-shadow: none;
+}
+.addItem > button.active {
+  color: #fff;
+}
+
+.addItem > button .dashicon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  margin-bottom: -5px;
+}

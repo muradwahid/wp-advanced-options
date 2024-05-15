@@ -8,19 +8,19 @@ export const Device = ({
   className,
   position = "horizontal"
 }) => {
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const deviceValue = [
     {
-      value: 'desktop',
+      device: 'desktop',
       icon: 'dashicons-desktop',
     },
-    { value: 'tablet', icon: 'dashicons-tablet' },
-    { value: 'mobile', icon: 'dashicons-smartphone' },
+    { device: 'tablet', icon: 'dashicons-tablet' },
+    { device: 'mobile', icon: 'dashicons-smartphone' },
   ];
   return (
     <Fragment>
       <div style={style} className={className}>
-        {!show && (
+        {/* {!show && (
           <div style={{ display: 'flex' }}>
             <button onClick={() => setShow(true)} className="single-device">
               <span
@@ -33,23 +33,23 @@ export const Device = ({
               ></span>
             </button>
           </div>
-        )}
-        {show && (
-          <div style={{ display: position === "horizontal" ? "flex" : "grid" }}>
-            {deviceValue.map(({ value, icon }, i) => (
+        )} */}
+        {/* {show && ( */}
+          <div style={{ display: position === "horizontal" ? "flex" : "grid",gap:"5px"}}>
+            {deviceValue.map(({ device, icon }, i) => (
               <button
                 key={i}
                 onClick={() => {
-                  setShow(false);
-                  onChange(value);
+                  // setShow(false);
+                  onChange(device);
                 }}
-                className="single-device"
+                className={`advancedOptionssingle-device ${device===value?"active":""}`}
               >
-                <span className={`dashicons ${icon}`}></span>
+                <span className={`dashicons ${icon} ${device===value?"active":""} `}></span>
               </button>
             ))}
           </div>
-        )}
+        {/* )} */}
       </div>
     </Fragment>
   );

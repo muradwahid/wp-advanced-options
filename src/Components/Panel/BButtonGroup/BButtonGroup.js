@@ -3,7 +3,7 @@ export const BButtonGroup = ({
   options = [],
   label = "Button Group",
   value,
-  onChange = () => { },
+  onChange = () => {},
   borderRadius = "30px",
   height,
   paddingX = "8px",
@@ -24,9 +24,8 @@ export const BButtonGroup = ({
   const btnRef = useRef(null);
   const bgSlideRef = useRef(null);
   const uniqId = Math.floor(Math.random() * 99999999);
-
-
   useEffect(() => {
+    const activeIndex=activeButton > options.length - 1 ? activeButton - 1 : activeButton
     const btnWrapper = btnRef.current;
     const bdSlide = bgSlideRef.current;
     if (value) {
@@ -38,8 +37,8 @@ export const BButtonGroup = ({
     }
 
     const btns = btnWrapper.querySelectorAll(`.bpl-button-group-${uniqId}`);
-    const singleBtn = Array.from(btns)[activeButton];
-    const leftValue = Array.from(btns)[activeButton === 0 ? activeButton : activeButton - 1].getBoundingClientRect().width.toFixed(2)
+    const singleBtn = Array.from(btns)[activeIndex];
+    // const leftValue = Array.from(btns)[activeButton === 0 ? activeButton : activeButton - 1].getBoundingClientRect().width.toFixed(2)
     const boundingHeight = singleBtn.getBoundingClientRect().height.toFixed(2);
     const boundingWidth = singleBtn.getBoundingClientRect().width.toFixed(2);
     const width = Number(boundingWidth);
@@ -47,13 +46,14 @@ export const BButtonGroup = ({
 
     bdSlide.style.width = `${width || singleBtn.clientWidth}px`;
     bdSlide.style.height = `${height || singleBtn.clientHeight}px`;
-    bdSlide.style.left = `${activeButton * leftValue}px`;
-  }, [activeButton, value]);
-  const handleSetValue = (option, i) => {
+    // bdSlide.style.left = `${activeButton * leftValue}px`;
+    bdSlide.style.left = `${singleBtn.offsetLeft}px`;
+  }, [activeButton,options, value]);
+
+  const handleSetValue = (e, option, i) => {
     setActiveButton(i);
     onChange(option.value);
   };
-
 
   return (
     <div style={{ marginBottom: "10px", ...style }}>
@@ -64,9 +64,23 @@ export const BButtonGroup = ({
           transition: background 0.3s ease-in-out;
         }
       `}</style>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         {label && <label style={{ fontWeight: 500 }}>{label}</label>}
-        <div ref={btnRef} style={{ display: "flex", position: "relative", border: "1px solid #ccc", borderRadius }}>
+        <div
+          ref={btnRef}
+          style={{
+            display: "flex",
+            position: "relative",
+            border: "1px solid #ccc",
+            borderRadius,
+          }}
+        >
           {btnOptions.map((option, i) => (
             <button
               style={{
@@ -86,9 +100,10 @@ export const BButtonGroup = ({
                 border: "none",
               }}
               key={i}
-              onClick={() => handleSetValue(option, i)}
-              className={`${activeButton !== i ? `bpl-buttonGroupHover-${uniqId}` : ""
-                } bpl-button-group-${uniqId}`}
+              onClick={(e) => handleSetValue(e, option, i)}
+              className={`${
+                activeButton !== i ? `bpl-buttonGroupHover-${uniqId}` : ""
+              } bpl-button-group-${uniqId}`}
             >
               {options.length ? option.label : "Button " + (i + 1)}
             </button>
@@ -110,4 +125,3 @@ export const BButtonGroup = ({
     </div>
   );
 };
-

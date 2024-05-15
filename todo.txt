@@ -1,0 +1,26 @@
+{
+  "background": {
+    "normal": {
+      "type": "color",
+      "color": "",
+      "gradient": {},
+      "img": {}
+    },
+    "hover": {
+      "type": "color",
+      "color": "",
+      "gradient": {},
+      "img": {}
+    },
+    "hoverType": "normal"
+  },
+  "borderShadow": {
+    "normal": {},
+    "hover": {}
+  },
+  "responsiveControl":{
+    "desktop":false,
+    "tablet":false,
+    "mobile":false
+  }
+}

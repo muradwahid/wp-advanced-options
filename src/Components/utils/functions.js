@@ -17,3 +17,12 @@ export const updateData = (attr, value, ...props) => {
     draft[currentProp] = updateData(draft[currentProp], value, ...remainingProps);
   });
 };
+
+// const getUnit = (unit) => {
+//   const number = parseInt(unit) ||0;
+//   const unitType = unit.slice(number.toString().length); // Extract unit type after number
+//   console.log(number);
+//   console.log(unitType);
+// }
+
+// getUnit("10px")
