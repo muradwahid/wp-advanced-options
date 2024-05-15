@@ -3,20 +3,26 @@ import { BBoxControl } from "../Panel/BBoxControl/BBoxControl";
 import { Device } from "../Panel/Device/Device";
 
 import { InspectorControls } from "@wordpress/block-editor";
-import { PanelBody, ToggleControl } from "@wordpress/components";
+import { Flex, PanelBody, SelectControl, ToggleControl } from "@wordpress/components";
 import { AdvBackground } from "../Panel/AdvBackground/AdvBackground";
 import AdvOverlay from "../Panel/AdvOverlay/AdvOverlay";
 import BMultiShadowControl from "../Panel/BMultiShadowControl/BMultiShadowControl";
 import BorderControl from "../Panel/BorderControl/BorderControl";
 import { Tab } from "../Panel/Tab/Tab";
-import { advBgOptions, unitOptions } from "../utils/options";
+import { advBgOptions, animationOptions, unitOptions } from "../utils/options";
 import "./advancedOptionsStyle.css";
 import { RangeControl } from "@wordpress/components";
+import Label from "../Panel/Label/Label";
+import AdvAnimation from "../Panel/AdvAnimation/AdvAnimation";
 
 const AdvancedOptions = ({
   attributes,
   setAttributes,
-  enabled = ["background", "padding"],
+  isDimension = true,
+  isBackground = true,
+  isOverlay = true,
+  isBorderShadow = true,
+  isResponsive = true
 }) => {
   const [device, setDevice] = useState("desktop");
   const [shadowTab, setShadowTab] = useState("normal");
@@ -27,7 +33,8 @@ const AdvancedOptions = ({
     background,
     overlay,
     borderShadow,
-    responsiveControl
+    responsiveControl,
+    animation
   } = advanced;
   useEffect(() => {
     console.log(advanced);
@@ -82,7 +89,7 @@ const AdvancedOptions = ({
         <PanelBody
           title="Background"
           className="bPlAdvPanelBody"
-          initialOpen={true}
+          initialOpen={false}
         >
           <AdvBackground
             value={background || {}}
@@ -165,7 +172,7 @@ const AdvancedOptions = ({
         {/* responsive control */}
         <PanelBody
           title="Responsive Control"
-          initialOpen={true}
+          initialOpen={false}
           className="bPlAdvPanelBody"
         >
           <ToggleControl
@@ -173,7 +180,12 @@ const AdvancedOptions = ({
             value={responsiveControl?.desktop}
             checked={responsiveControl?.desktop}
             onChange={(val) =>
-              setAttributes({ advanced: { ...advanced, responsiveControl:{...responsiveControl,desktop:val}} })
+              setAttributes({
+                advanced: {
+                  ...advanced,
+                  responsiveControl: { ...responsiveControl, desktop: val },
+                },
+              })
             }
           />
           <ToggleControl
@@ -181,7 +193,12 @@ const AdvancedOptions = ({
             value={responsiveControl?.tablet}
             checked={responsiveControl?.tablet}
             onChange={(val) =>
-              setAttributes({ advanced: { ...advanced, responsiveControl:{...responsiveControl,tablet:val}} })
+              setAttributes({
+                advanced: {
+                  ...advanced,
+                  responsiveControl: { ...responsiveControl, tablet: val },
+                },
+              })
             }
           />
           <ToggleControl
@@ -189,9 +206,23 @@ const AdvancedOptions = ({
             value={responsiveControl?.mobile}
             checked={responsiveControl?.mobile}
             onChange={(val) =>
-              setAttributes({ advanced: { ...advanced, responsiveControl:{...responsiveControl,mobile:val}} })
+              setAttributes({
+                advanced: {
+                  ...advanced,
+                  responsiveControl: { ...responsiveControl, mobile: val },
+                },
+              })
             }
           />
+        </PanelBody>
+
+        {/* animation */}
+        <PanelBody
+          title="Animation"
+          initialOpen={true}
+          className="bPlAdvPanelBody"
+        >
+        <AdvAnimation value={animation} onChange={val=>setAttributes({advanced:{...advanced,animation:val}})} />
         </PanelBody>
       </div>
     </div>

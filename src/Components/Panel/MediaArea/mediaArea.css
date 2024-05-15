@@ -32,6 +32,9 @@
     border: 1px solid #ababab;
     backdrop-filter: blur(3px);
 }
+.custom-media-area-component>.media-area-container>.media-plusBtn-wrapper>.mediaPlus-btn-circle>svg{
+  margin:0px !important;
+}
 .custom-media-area-component>.media-area-container>.media-bottom {
   position: absolute;
   bottom: -40px;

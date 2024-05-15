@@ -22,5 +22,10 @@
     "desktop":false,
     "tablet":false,
     "mobile":false
-  }
+  },
+  "animation":{
+  "type": "none",
+  "speed": 0.05,
+  "delay": 0.05
+}
 }

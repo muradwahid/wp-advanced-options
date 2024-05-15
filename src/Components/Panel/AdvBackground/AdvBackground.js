@@ -38,7 +38,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
         type: "color",
         color: "#0000",
         gradient: advGradientOptions,
-        img: {},
+        img: {position:"center-center",xPosition:0,yPosition:0,attachment:"default",repeat:"no-repeat",size:"default",customSize:"0px"},
       },
       hover: { type: "color", color: "#0000", gradient: {}, img: {} },
       hoverType: "normal",
@@ -127,7 +127,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
             height="100%"
           />
 
-          {/* {img.url && */}
+          {img.url &&
           <Fragment>
             <Flex className="mt20 mb5" gap={4} align="center">
               <Label className="">Position</Label>
@@ -240,7 +240,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
               </Fragment>
             )}
           </Fragment>
-          {/* } */}
+          }
         </Fragment>
       )}
     </Fragment>
