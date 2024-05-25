@@ -1,4 +1,4 @@
-input[type="checkbox"]:focus,
+.bplAdvControls input[type="checkbox"]:focus,
 input[type="color"]:focus,
 input[type="date"]:focus,
 input[type="datetime-local"]:focus,

@@ -3,20 +3,20 @@ import { useEffect, useState } from 'react';
 
 export const BBoxControl = ({ label, values, onChange = () => { }, resetValues, defaultValues, units, sides, style, className,disableUnits=false }) => {
   const [link, setLink] = useState(true);
-  const [value, setValue] = useState(values || {});
+  // const [value, setValue] = useState(values || {});
 
   const unitSides = sides || ["top", "right", "bottom", "left"];
 
   const resetOption = resetValues && Object.keys(resetValues).map((key) => {
     let isReset = false;
-    if (resetValues[key] !== value[key]) {
+    if (Object.keys(values) && resetValues[key] !== values[key]) {
       isReset = false;
     } else {
       isReset = true;
     }
     return isReset
   })
-  const isReset = resetValues && resetOption.includes(false) && Object.keys(value).length>0;
+  const isReset = resetValues && resetOption.includes(false) && Object.keys(values)?.length>0;
   const defaultUnits = [
     { label: "px", value: "px" },
     { label: "%", value: "%" },
@@ -28,19 +28,19 @@ export const BBoxControl = ({ label, values, onChange = () => { }, resetValues, 
 
   const handleChange = (val, dimension) => {
     if (!link) {
-      setValue({ top: val, right: val, bottom: val, left: val });
+      onChange({ top: val, right: val, bottom: val, left: val });
     } else {
       if (sides) {
-        dimension === "horizontal" ? setValue({ ...value, right: val, left: val }) : dimension === "vertical" && setValue({ ...value, top: val, bottom: val })
+        dimension === "horizontal" ? onChange({ ...values, right: val, left: val }) : dimension === "vertical" && onChange({ ...values, top: val, bottom: val })
       } else {
-        setValue({ ...value, [dimension]: val });
+        onChange({ ...values, [dimension]: val });
       }
     }
   };
 
   useEffect(() => {
-    onChange(value);
-  }, [value])
+    onChange(values);
+  }, [values])
 
   return (
     <div style={{ marginBottom: "8px", ...style }} className={className}>
@@ -83,13 +83,29 @@ export const BBoxControl = ({ label, values, onChange = () => { }, resetValues, 
         <div style={{ marginBottom: "5px" }}>
           {label && <label>{label}</label>}
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: sides ? sides.includes("horizontal", "vertical") ? "5px" : "0px" : "0px" }}>
-          {
-            unitSides.map((val, i) => {
-              return <div className="bplUnitControlWrapper" key={i}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: sides
+              ? sides.includes("horizontal", "vertical")
+                ? "5px"
+                : "0px"
+              : "0px",
+          }}
+        >
+          {unitSides.map((val, i) => {
+            return (
+              <div className="bplUnitControlWrapper" key={i}>
                 <UnitControl
-                  onChange={v => handleChange(v, val)} // Pass dimension
-                  value={sides ? val === "horizontal" ? value.right : val === "vertical" && value.top : value[val]}
+                  onChange={(v) => handleChange(v, val)} // Pass dimension
+                  value={
+                    sides
+                      ? val === "horizontal"
+                        ? values?.right
+                        : val === "vertical" && values?.top
+                      : values?.[val]
+                  }
                   defaultValue={defaultValues || null}
                   units={units || defaultUnits}
                   disableUnits={disableUnits}
@@ -98,20 +114,28 @@ export const BBoxControl = ({ label, values, onChange = () => { }, resetValues, 
                   <small style={{ textTransform: "capitalize" }}>{val}</small>
                 </div>
               </div>
-            })
-          }
-          {
-            !sides && <button className="bplPanel-link-button" onClick={() => setLink(!link)}>
-              {
-                link ? <span className="dashicons dashicons-admin-links"></span> : <span className="dashicons dashicons-editor-unlink"></span>
-              }
+            );
+          })}
+          {!sides && (
+            <button
+              className="bplPanel-link-button"
+              onClick={() => setLink(!link)}
+            >
+              {link ? (
+                <span className="dashicons dashicons-admin-links"></span>
+              ) : (
+                <span className="dashicons dashicons-editor-unlink"></span>
+              )}
             </button>
-          }
-          {
-            isReset && <button onClick={()=>setValue(resetValues)} className="bplPanel-link-button">
+          )}
+          {isReset && (
+            <button
+              onClick={() => onChange(resetValues)}
+              className="bplPanel-link-button"
+            >
               <span className="dashicons dashicons-image-rotate"></span>
             </button>
-          }
+          )}
         </div>
       </div>
     </div>

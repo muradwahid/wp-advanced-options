@@ -1,4 +1,7 @@
 {
+  "dimention":{
+    
+  },
   "background": {
     "normal": {
       "type": "color",
@@ -18,14 +21,26 @@
     "normal": {},
     "hover": {}
   },
+  "visibility":{
+    "zIndex":{"desktop":"","tablet":"","mobile":""},
+    "overflow":"default"
+  },
   "responsiveControl":{
     "desktop":false,
     "tablet":false,
     "mobile":false
   },
   "animation":{
-  "type": "none",
-  "speed": 0.05,
-  "delay": 0.05
+    "type": "none",
+    "speed": 0.05,
+    "delay": 0.05
+  }
 }
-}
+
+
+
+
+//used packages
+
+1. npm i immer
+2. npm i react-ace

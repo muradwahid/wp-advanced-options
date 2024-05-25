@@ -1,56 +1,71 @@
-import { Fragment, useState } from 'react';
+import { compose } from "@wordpress/compose";
+import { withDispatch, withSelect } from "@wordpress/data";
+import { Fragment } from "react";
+
 import "./style.css";
 
-export const Device = ({
-  value = 'desktop',
-  onChange = () => { },
-  style,
-  className,
-  position = "horizontal"
-}) => {
-  // const [show, setShow] = useState(false);
-  const deviceValue = [
-    {
-      device: 'desktop',
-      icon: 'dashicons-desktop',
-    },
-    { device: 'tablet', icon: 'dashicons-tablet' },
-    { device: 'mobile', icon: 'dashicons-smartphone' },
-  ];
-  return (
-    <Fragment>
-      <div style={style} className={className}>
-        {/* {!show && (
-          <div style={{ display: 'flex' }}>
-            <button onClick={() => setShow(true)} className="single-device">
-              <span
-                className={`dashicons dashicons-${value === 'desktop'
-                  ? 'desktop'
-                  : value === 'tablet'
-                    ? 'tablet'
-                    : 'smartphone'
-                  }`}
-              ></span>
-            </button>
-          </div>
-        )} */}
-        {/* {show && ( */}
-          <div style={{ display: position === "horizontal" ? "flex" : "grid",gap:"5px"}}>
-            {deviceValue.map(({ device, icon }, i) => (
+export const Device = compose(
+  withSelect((select) => {
+    return {
+      device: select("core/edit-post")
+        .__experimentalGetPreviewDeviceType()
+        ?.toLowerCase(),
+    };
+  }),
+  withDispatch((dispatch) => {
+    return {
+      setDevice(device) {
+        return dispatch("core/edit-post").__experimentalSetPreviewDeviceType(
+          device
+        );
+      },
+    };
+  })
+)(
+  ({
+    style,
+    className,
+    position = "horizontal",
+    device,
+    setDevice,
+  }) => {
+    // const [show, setShow] = useState(false);
+    const deviceValue = [
+      { label: "Desktop", name: "desktop", icon: "dashicons-desktop" },
+      { label: "Tablet", name: "tablet", icon: "dashicons-tablet" },
+      { label: "Mobile", name: "mobile", icon: "dashicons-smartphone" },
+    ];
+    return (
+      <Fragment>
+        <div style={style} className={className}>
+          <div
+            style={{
+              display: position === "horizontal" ? "flex" : "grid",
+              gap: "5px",
+            }}
+          >
+            {deviceValue.map(({ label, name, icon }, i) => (
               <button
                 key={i}
                 onClick={() => {
                   // setShow(false);
-                  onChange(device);
+                  setDevice(label);
                 }}
-                className={`advancedOptionssingle-device ${device===value?"active":""}`}
+                className={`advancedOptionssingle-device ${
+                  name === device ? "active" : ""
+                }`}
               >
-                <span className={`dashicons ${icon} ${device===value?"active":""} `}></span>
+                <span
+                  className={`dashicons ${icon} ${
+                    name === device ? "active" : ""
+                  } `}
+                ></span>
               </button>
             ))}
           </div>
-        {/* )} */}
-      </div>
-    </Fragment>
-  );
-};
+          {/* )} */}
+        </div>
+      </Fragment>
+    );
+  }
+);

@@ -1,20 +1,19 @@
 import { RangeControl, SelectControl } from "@wordpress/components";
 import React, { useEffect } from "react";
 import Label from "../Label/Label";
+import AOS from "./animationStyle/aos";
 import "./animationStyle/aos.css";
 import { animationOptions } from "./options";
-// import "./animationStyle/aos"
-import AOS from "./animationStyle/aos";
 window["AOS"] = AOS;
 const AdvAnimation = ({ value, onChange }) => {
-	useEffect(() => {
+  useEffect(() => {
     window["AOS"]?.init();
   }, []);
 
   useEffect(() => {
-    const animatedWrapper = document.querySelector("#hbHelloBlock-123456" )
+    const animatedWrapper = document.querySelector("#hbHelloBlock-123456");
     const btnClassList = animatedWrapper.classList;
-    
+
     animatedWrapper.setAttribute("data-aos", value.type);
     btnClassList.remove("aos-init");
     btnClassList.remove("aos-animate");
@@ -23,7 +22,7 @@ const AdvAnimation = ({ value, onChange }) => {
       btnClassList.add("aos-init");
       btnClassList.add("aos-animate");
     }, 500);
-  }, [value.type,value.delay,value.speed]);
+  }, [value.type, value.delay, value.speed]);
 
   return (
     <div>

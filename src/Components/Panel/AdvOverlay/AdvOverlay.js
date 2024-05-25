@@ -21,7 +21,7 @@ const blendOptions = [
   { label: "Luminosity", value: "luminosity" },
 ];
 
-const AdvOverlay = ({ value, onChange }) => {
+const AdvOverlay = ({ value, onChange,device }) => {
   const [overlay, setOverlay] = useState(value || {
     isEnabled:false,
     colors:advBgOptions,
@@ -72,6 +72,7 @@ const AdvOverlay = ({ value, onChange }) => {
         <Fragment>
           <AdvBackground
             value={colors}
+            device={device}
             onChange={(val) => updateOverlay("colors", val)}
           />
           <hr />

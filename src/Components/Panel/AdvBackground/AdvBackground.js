@@ -19,19 +19,7 @@ import Label from "../Label/Label";
 import { MediaArea } from "../MediaArea/MediaArea";
 import { PanelCustomColorControl } from "../PanelCustomColorControl/PanelCustomColorControl";
 import { Tab } from "../Tab/Tab";
-export const AdvBackground = ({ value, onChange = () => {} }) => {
-  const [device, setDevice] = useState("desktop");
-  // const [tab, setTab] = useState({
-  //   background: {
-  //     bgType: "classic",
-  //     overlay: {
-  //       isOverlay: false,
-  //       bgOverlay: "normal",
-  //       overlayType: "classic",
-  //       isCssFilter: false
-  //     }
-  //   },
-  // })
+export const AdvBackground = ({ value, onChange = () => {},device }) => {
   const [bgValue, setBgValue] = useState(
     value || {
       normal: {
@@ -59,10 +47,6 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
     size = "default",
     customSize = 0,
   } = img[device] || {};
-  // useEffect(() => {
-  //   console.log(bgValue)
-  //   onChange(bgValue)
-  // }, [bgValue])
 
   const updateBG = (property, value, childP = null) => {
     const newBG = produce(bgValue, (draft) => {
@@ -131,7 +115,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
           <Fragment>
             <Flex className="mt20 mb5" gap={4} align="center">
               <Label className="">Position</Label>
-              <Device value={device} onChange={(val) => setDevice(val)} />
+              <Device />
             </Flex>
             <div className="advExtraMargin">
               <SelectControl
@@ -147,7 +131,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
               <Fragment>
                 <Flex className="mt20 mb5" gap={4} align="center">
                   <Label className="">X Position</Label>
-                  <Device value={device} onChange={(val) => setDevice(val)} />
+                  <Device />
                 </Flex>
                 <UnitControl
                   units={unitOptions}
@@ -161,7 +145,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
 
                 <Flex className="mt20 mb5" gap={4} align="center">
                   <Label className="">Y Position</Label>
-                  <Device value={device} onChange={(val) => setDevice(val)} />
+                  <Device />
                 </Flex>
                 <div className="advExtraMargin">
                   <UnitControl
@@ -183,7 +167,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
 
             <Flex className="mt20 mb5" gap={4} align="center">
               <Label className="">Attachment</Label>
-              <Device value={device} onChange={(val) => setDevice(val)} />
+              <Device />
             </Flex>
             <div className="advExtraMargin">
               <SelectControl
@@ -197,7 +181,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
 
             <Flex className="mt20 mb5" gap={4} align="center">
               <Label className="">Repeat</Label>
-              <Device value={device} onChange={(val) => setDevice(val)} />
+              <Device />
             </Flex>
             <div className="advExtraMargin">
               <SelectControl
@@ -211,7 +195,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
 
             <Flex className="mt20 mb5" gap={4} align="center">
               <Label className="">Repeat</Label>
-              <Device value={device} onChange={(val) => setDevice(val)} />
+              <Device />
             </Flex>
             <div className="advExtraMargin">
               <SelectControl
@@ -226,7 +210,7 @@ export const AdvBackground = ({ value, onChange = () => {} }) => {
               <Fragment>
                 <Flex className="mt20 mb5" gap={4} align="center">
                   <Label className="">Width</Label>
-                  <Device value={device} onChange={(val) => setDevice(val)} />
+                  <Device />
                 </Flex>
                 <UnitControl
                   units={unitOptions}
