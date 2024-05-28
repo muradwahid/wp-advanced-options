@@ -44,14 +44,15 @@ const AdvancedOptions = ({
     customCss,
   } = advanced || {};
   useEffect(() => {
-    console.log(advanced)
-  }, [advanced, device]);
+    console.log(background)
+  }, [background, device]);
   return (
     <div className="bplAdvControls">
       <div>
         {/* dimension */}
         {isDimension && (
-          <div style={{ padding: "16px" }}>
+          <PanelBody title="Margin & Padding" initialOpen={false}>
+            <div>
             <div style={{ position: "relative" }}>
               <Device
                 style={{ position: "absolute", right: "0px", top: "2px" }}
@@ -95,13 +96,14 @@ const AdvancedOptions = ({
               />
             </div>
           </div>
+          </PanelBody>
         )}
         {/* background */}
         {isBackground && (
           <PanelBody
             title="Background"
             className="bPlAdvPanelBody"
-            initialOpen={false}
+            initialOpen={true}
           >
             <AdvBackground
               value={background || {}}

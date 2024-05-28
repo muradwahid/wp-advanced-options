@@ -35,3 +35,16 @@ define( 'AOG_DIR_PATH', plugin_dir_path( __FILE__ ) );
 // new AOGPlugin();
 
 require_once AOG_DIR_PATH . 'inc/block.php';
+
+if(!class_exists( 'AOGPlugin' ) ){
+  class AOGPlugin{
+    function __construct(){
+      add_action( 'enqueue_block_assets', [$this, 'enqueueBlockAssets'] );
+    }
+
+    function enqueueBlockAssets(){
+      wp_enqueue_script( 'aog-advanced-style-script', AOG_DIR_URL. 'dist/advanced-style.js', [], AOG_VERSION, true );
+    }
+  }
+  new AOGPlugin();
+}

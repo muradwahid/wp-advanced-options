@@ -12,16 +12,17 @@ const AdvAnimation = ({ value, onChange }) => {
 
   useEffect(() => {
     const animatedWrapper = document.querySelector("#hbHelloBlock-123456");
-    const btnClassList = animatedWrapper.classList;
+    const btnClassList = animatedWrapper?.classList;
 
-    animatedWrapper.setAttribute("data-aos", value.type);
-    btnClassList.remove("aos-init");
-    btnClassList.remove("aos-animate");
-
-    setTimeout(() => {
-      btnClassList.add("aos-init");
-      btnClassList.add("aos-animate");
-    }, 500);
+    if (btnClassList) {
+      animatedWrapper.setAttribute("data-aos", value.type);
+      btnClassList.remove("aos-init");
+      btnClassList.remove("aos-animate");
+      setTimeout(() => {
+        btnClassList.add("aos-init");
+        btnClassList.add("aos-animate");
+      }, 500);
+    }
   }, [value.type, value.delay, value.speed]);
 
   return (

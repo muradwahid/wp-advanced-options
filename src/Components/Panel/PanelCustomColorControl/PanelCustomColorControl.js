@@ -3,6 +3,7 @@ import { Fragment, useState } from 'react';
 import { PanelColorPicker } from '../PanelColorPicker/PanelColorPicker';
 import "./panelCustomColorControl.css";
 import { Button, Dropdown, GradientPicker } from '@wordpress/components';
+import {  } from "@wordpress/block-editor"
 import { BButtonGroup } from '../BButtonGroup/BButtonGroup';
 import { useSelect } from '@wordpress/data';
 
@@ -15,6 +16,7 @@ export const PanelCustomColorControl = (props) => {
   const themeColors = useSelect('core/block-editor').getSettings().gradients
   const [tab, setTab] = useState('solid');
   const id = Math.floor(Math.random() * 9999999);
+  const gradientValue = "linear-gradient(to bottom, #D8613C 0%, #F9F9F9 100%)";
   return (
     <div>
       <style>
@@ -114,9 +116,10 @@ export const PanelCustomColorControl = (props) => {
               {tab === 'gradient' && (
                 <div style={{ marginTop: '10px' }}>
                   <GradientPicker
-                    value={value}
+                    value={value || gradientValue}
                     onChange={(value) => onChange(value)}
                     gradients={themeColors}
+
                   />
                 </div>
               )}

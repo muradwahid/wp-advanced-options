@@ -3,7 +3,6 @@ import {
   __experimentalNumberControl as NumberControl,
   SelectControl,
 } from "@wordpress/components";
-import { useState } from "react";
 import { Device } from "../Device/Device";
 import Label from "../Label/Label";
 const overflowOptions = [
@@ -13,7 +12,7 @@ const overflowOptions = [
   { label: "Visible", value: "visible" },
   { label: "Scroll", value: "scroll" },
 ];
-const VisibilityOptions = ({ value, onChange,device}) => {
+const VisibilityOptions = ({ value, onChange, device="desktop" }) => {
   const { zIndex, overflow = "default" } = value || {};
   return (
     <div>
@@ -22,7 +21,7 @@ const VisibilityOptions = ({ value, onChange,device}) => {
         <Device />
       </Flex>
       <NumberControl
-        value={zIndex || ""}
+        value={zIndex?.[device]}
         onChange={(val) =>
           onChange({ ...value, zIndex: { ...zIndex, [device]: val } })
         }

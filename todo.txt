@@ -10,11 +10,20 @@
       "img": {}
     },
     "hover": {
-      "type": "color",
-      "color": "",
-      "gradient": {},
-      "img": {}
-    },
+        "type": "color",
+        "color": "#0000",
+        "gradient": {},
+        "transition": 0.3,
+        "img": {
+          "position": "center-center",
+          "xPosition":"",
+          "yPosition":"",
+          "attachment": "default",
+          "repeat": "no-repeat",
+          "size": "default",
+          "customSize":""
+        }
+      },
     "hoverType": "normal"
   },
   "borderShadow": {

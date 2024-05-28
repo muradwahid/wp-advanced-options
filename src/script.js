@@ -18,6 +18,7 @@ function FrontEnd({ attributes }) {
 const container = document.querySelectorAll(".wp-block-aog-hello");
 container?.forEach(ele => {
 	const attributes = JSON.parse(ele.dataset.attributes);
-	const root = createRoot(ele);
+  const root = createRoot(ele);
+  ele.removeAttribute("data-attributes");
 	root.render(<FrontEnd attributes={attributes} />);
 })
