@@ -89,3 +89,7 @@ $primaryColor: #4527a4;
 .advExtraMargin .components-unit-control-wrapper {
   margin-bottom: 10px !important;
 }
+
+.advExtraMargin .components-base-control .components-base-control__field .components-select-control .components-input-control__label{
+ text-transform: none !important;
+}

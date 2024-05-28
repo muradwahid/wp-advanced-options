@@ -71,6 +71,7 @@ const AdvOverlay = ({ value, onChange,device }) => {
       {isEnabled && (
         <Fragment>
           <AdvBackground
+            name="Overlay"
             value={colors}
             device={device}
             onChange={(val) => updateOverlay("colors", val)}

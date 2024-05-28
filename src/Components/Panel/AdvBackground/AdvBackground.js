@@ -5,7 +5,7 @@ import {
   __experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import { produce } from "immer";
-import { Fragment, useState } from "react";
+import { Fragment, useState,useEffect } from "react";
 import {
   advGradientOptions,
   imgAttachmentOptions,
@@ -22,6 +22,7 @@ import { PanelCustomColorControl } from "../PanelCustomColorControl/PanelCustomC
 import { Tab } from "../Tab/Tab";
 
 export const AdvBackground = ({
+  name="Background",
   value,
   onChange = () => {},
   device = "desktop",
@@ -47,6 +48,9 @@ export const AdvBackground = ({
     setBgValue(newHb);
     onChange(newHb);
   };
+  useEffect(() => {
+    onChange(bgValue);
+  }, [bgValue])
   return (
     <Fragment>
       <Tab
@@ -59,7 +63,7 @@ export const AdvBackground = ({
         <Fragment>
           <div className="advExtraMargin">
             <RangeControl
-              label="Background Transition"
+              label={`${name} Transition`}
               min={0}
               max={5}
               step={0.05}
@@ -69,6 +73,7 @@ export const AdvBackground = ({
           </div>
 
           <Background
+            name={name}
             value={bgValue.hover}
             onChange={(val) => setBgValue({ ...bgValue, hover: val })}
             device={device}
@@ -78,6 +83,7 @@ export const AdvBackground = ({
       {bgValue.hoverType === "normal" && (
         <Fragment>
           <Background
+            name={name}
             value={bgValue.normal}
             onChange={(val) => setBgValue({ ...bgValue, normal: val })}
             device={device}
@@ -88,7 +94,7 @@ export const AdvBackground = ({
   );
 };
 
-const Background = ({ value, onChange, device }) => {
+const Background = ({ name,value, onChange, device }) => {
   const [bgValue, setBgValue] = useState(
     value || {
       type: "color",
@@ -127,7 +133,9 @@ const Background = ({ value, onChange, device }) => {
     }
   );
 
-  const { type, color, gradient, img } = bgValue || {};
+
+
+  const { type, color, gradient, img } =value || bgValue || {};
   const {
     position,
     xPosition,
@@ -141,10 +149,9 @@ const Background = ({ value, onChange, device }) => {
     const newBG = produce(bgValue, (draft) => {
       if (null !== thirdP) {
         draft[property][secondP][thirdP] = value;
-      } else if (secondP) {
+      } else if (property && secondP) {
         draft[property][secondP] = value;
-      }
-      {
+      }else{
         draft[property] = value;
       }
     });
@@ -152,10 +159,12 @@ const Background = ({ value, onChange, device }) => {
     onChange(newBG);
   };
 
+  useEffect(() =>onChange(bgValue),[bgValue])
+
   return (
     <Fragment>
       <div style={{ marginBottom: "-7px" }}>
-        <label>Background Type</label>
+        <label>{name} Type</label>
       </div>
       <Tab
         options={["Color", "Gradient", "Image"]}
@@ -164,7 +173,7 @@ const Background = ({ value, onChange, device }) => {
       />
       {type === "color" && (
         <PanelCustomColorControl
-          label="Background Color"
+          label={`${name} Color`}
           value={color}
           onChange={(val) => updateBG("color", val)}
         />
@@ -178,12 +187,15 @@ const Background = ({ value, onChange, device }) => {
       {type === "image" && (
         <Fragment>
           <div>
-            <label>Background Image</label>
+            <label>{name} Image</label>
           </div>
           <MediaArea
             label="Upload Image"
-            value={img}
-            onChange={(val) => updateBG("img", val.url, "url")}
+            value={value.img}
+            // onChange={(val) => updateBG("img", val.url, "url")}
+            onChange={(val) =>
+              onChange({ ...value, img: { ...img, url: val.url } })
+            }
             width="100%"
             height="100%"
           />

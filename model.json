@@ -121,11 +121,3 @@
     "delay": 0.05
   }
 }
-
-
-
-
-//used packages
-
-1. npm i immer
-2. npm i react-ace

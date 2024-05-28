@@ -1,25 +1,37 @@
 //get responsive css
 const getResponsiveCss = (desktop, tablet, mobile, id, isHover = false) => {
-  return `@media only screen and (max-width: 640px) {
+  return `${
+    mobile
+      ? `@media only screen and (max-width: 640px) {
     ${
       isHover
         ? `#${id}:hover{${mobile ? mobile : ""}}`
         : `#${id}{${mobile ? mobile : ""}}`
     }
-}
-@media only screen and (min-width:641px) and (max-width: 1024px) {
+}`
+      : ""
+  }
+${
+  tablet
+    ? `@media only screen and (min-width:641px) and (max-width: 1024px) {
       ${
         isHover
           ? `#${id}:hover{${tablet ? tablet : ""}}`
           : `#${id}{${tablet ? tablet : ""}}`
       }
+}`
+    : ""
 }
-@media only screen and (min-width:1025px) {
+${
+  desktop
+    ? `@media only screen and (min-width:1025px) {
       ${
         isHover
           ? `#${id}:hover{${desktop ? desktop : ""}}`
           : `#${id}{${desktop ? desktop : ""}}`
       }
+}`
+    : ""
 }
 `;
 };
@@ -33,17 +45,6 @@ export const getBoxCss = (props, property) => {
     return result.join(" ");
   }
   return "";
-};
-//dimension
-export const getDimensionCss = (dimension, device) => {
-  if (dimension) {
-    return `${
-      dimension?.margin ? getBoxCss(dimension?.margin[device], "margin") : ""
-    }
-    ${
-      dimension?.padding ? getBoxCss(dimension?.padding[device], "padding") : ""
-    }`;
-  }
 };
 
 //gradient
@@ -62,7 +63,6 @@ export const getGradientCss = (gradient) => {
 };
 
 //get image position
-
 const getImagePosition = (img) => {
   return `${
     img?.position
@@ -91,7 +91,7 @@ const getImagePosition = (img) => {
 };
 
 //background image
-export const getImageCss = (img) => {
+const getImageCss = (img) => {
   let desktop, tablet, mobile;
   if (Object.keys(img).length > 1) {
     if (img?.desktop) {
@@ -106,7 +106,7 @@ export const getImageCss = (img) => {
   }
   if (img) {
     return {
-      global: `background-image: url(${img.url})`,
+      global: `background-image: url(${img.url});`,
       desktop,
       tablet,
       mobile,
@@ -115,24 +115,27 @@ export const getImageCss = (img) => {
   return "";
 };
 
-// {
-//     "url": "http://localhost/my-plugins/wp-content/uploads/2024/04/flyshot-info-image-02.png",
-//     "desktop": {
-//         "position": "custom",
-//         "xPosition": "2px",
-//         "yPosition": "-1px",
-//         "attachment": "default",
-//         "repeat": "no-repeat",
-//         "size": "default"
-//     }
-// }
-
+//background color
 const getColor = (color) => {
-  return ` ${color ?`background: ${ color }`:""}`;
+  return ` ${color ? `background: ${color};` : ""}`;
+};
+
+
+//dimension
+export const getDimensionCss = (dimension, device) => {
+  if (dimension) {
+    return `${
+      dimension?.margin ? getBoxCss(dimension?.margin[device], "margin") : ""
+    }
+    ${
+      dimension?.padding ? getBoxCss(dimension?.padding[device], "padding") : ""
+    }`;
+  }
+  return "";
 };
 
 //background
-export const getBackgroundCss = (background, id, device) => {
+export const getBackgroundCss = (background) => {
   const { normal, hover } = background;
   const { type, color, gradient, img } = normal;
   const {
@@ -150,71 +153,59 @@ export const getBackgroundCss = (background, id, device) => {
       ? getGradientCss(gradient)
       : type === "image"
       ? getImageCss(img).global
-          : "";
+      : "";
   const hoverBg =
     hoverType === "color"
       ? getColor(hoverColor)
-      : type === "gradient"
+      : hover.type === "gradient"
       ? getGradientCss(hoverGradient)
-      : type === "image"
+      : hover.type === "image"
       ? getImageCss(hoverImg).global
-          : "";
-  // console.log(hoverGradient)
-  return `#${id}{
-      ${bg}
-      ${transition ? `transition : all ${transition}s ease-in-out ;` : ""}}
-        ${
-          type === "image"
-            ? getResponsiveCss(
-                getImageCss(img).desktop,
-                getImageCss(img).tablet,
-                getImageCss(img).mobile,
-                id
-              )
-            : ""
-        }
-        ${
-          type === "image"
-            ? getResponsiveCss(
-                getImageCss(hoverImg).desktop,
-                getImageCss(hoverImg).tablet,
-                getImageCss(hoverImg).mobile,
-                id,
-                true
-              )
-            : ""
-        }
-        #${id}:hover{
-          ${hoverBg}
-        }
-    
-  `;
+      : "";
+  return {
+    normal: {
+      background: bg,
+      desktop: getImageCss(img).desktop,
+      tablet: getImageCss(img).tablet,
+      mobile: getImageCss(img).mobile,
+    },
+    hover: {
+      background: hoverBg,
+      desktop: getImageCss(hover.img).desktop,
+      tablet: getImageCss(hover.img).tablet,
+      mobile: getImageCss(hover.img).mobile,
+    },
+    transition: `transition:all ${
+      transition ? transition : 0.25
+    }s ease-in-out;`,
+  };
 };
 
-// {
-//     "normal": {
-//       "type": "color",
-//       "color": "",
-//       "gradient": {},
-//       "img": {}
-//     },
-//     "hover": {
-//       "type": "color",
-//       "color": "",
-//       "gradient": {},
-//       "img": {}
-//     },
-//     "hoverType": "normal"
-//   }
+//overlay
+export const getOverlayCss = (overlay) => {
+  const { colors } = overlay;
+  const { opacity, blend, isCssFilter, blur, brightness, contrast, saturation, hue } = overlay;
+  const filter = isCssFilter
+    ? `filter:brightness(${brightness}%) contrast(${contrast}%) saturation(${saturation}%) blur(${blur}px) hue-rotate(${hue}deg);
+    -webkit-filter:brightness(${brightness}%) contrast(${contrast}%) saturation(${saturation}%) blur(${blur}px) hue-rotate(${hue}deg);`
+    : "";
+  return {
+    normal: {
+      background: getBackgroundCss(colors).normal.background,
+      desktop: getBackgroundCss(colors).normal.desktop,
+      tablet: getBackgroundCss(colors).normal.tablet,
+      mobile: getBackgroundCss(colors).normal.mobile,
+    },
+    hover: {
+      background: getBackgroundCss(colors).hover.background,
+      desktop: getBackgroundCss(colors).hover.desktop,
+      tablet: getBackgroundCss(colors).hover.tablet,
+      mobile: getBackgroundCss(colors).hover.mobile,
+    },
+    transition: getBackgroundCss(colors).transition,
+    opacity: opacity ? `opacity: ${opacity};` : "",
+    blend: blend ? `mix-blend-mode: ${blend};` : "",
+    filter,
+  }
+};
 
-//gradient
-// {
-//     type: value.type || "linear",
-//     radialType: value.radialType || "ellipse",
-//     colors: value.colors || [
-//       { color: "", position: 0 },
-//       { color: "", position: 0 }
-//     ],
-//     centerPositions: value.centerPositions || { x: 0, y: 0 },
-//     angel: value.angel || 90
-//   }

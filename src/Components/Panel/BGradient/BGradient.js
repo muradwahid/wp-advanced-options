@@ -47,7 +47,7 @@ export const BGradient = ({ value, onChange }) => {
 
   const addColor = () => {
     const newColor = produce(advGradient.colors, (draft) => {
-      draft.push({ color: "", position: 0 });
+      draft.push({ color: "#f00", position: 0 });
     });
     setAdvGradient({ ...advGradient, colors: newColor });
     onChange({ ...advGradient, colors: newColor });

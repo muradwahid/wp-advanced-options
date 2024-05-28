@@ -44,8 +44,8 @@ const AdvancedOptions = ({
     customCss,
   } = advanced || {};
   useEffect(() => {
-    console.log(background)
-  }, [background, device]);
+    console.log(borderShadow)
+  }, [borderShadow, device]);
   return (
     <div className="bplAdvControls">
       <div>
@@ -103,7 +103,7 @@ const AdvancedOptions = ({
           <PanelBody
             title="Background"
             className="bPlAdvPanelBody"
-            initialOpen={true}
+            initialOpen={false}
           >
             <AdvBackground
               value={background || {}}
@@ -129,7 +129,7 @@ const AdvancedOptions = ({
         {isBorderShadow && (
           <PanelBody
             title="Border & Shadow"
-            initialOpen={false}
+            initialOpen={true}
             className="bPlAdvPanelBody"
           >
             <Tab

@@ -2,9 +2,8 @@ import { InspectorControls } from "@wordpress/block-editor";
 import { useEffect } from "react";
 import {
   AdvancedOptions,
-  getBackgroundCss,
-  getDimensionCss,
 } from "./Components";
+import { getOverlayCss } from "./Components/utils/getCss";
 
 const Edit = (props) => {
   const { className, setAttributes, clientId, attributes, cId } = props;
@@ -17,6 +16,8 @@ const Edit = (props) => {
   // console.log(advanced.background)
   // }, [advanced.background])
 
+  // console.log({background:attributes.advanced.background});
+
   return (
     <div
       className={className}
@@ -26,15 +27,9 @@ const Edit = (props) => {
       <style>
         {`
         #hbHelloBlock-123456{
-          ${getDimensionCss(advanced.dimension, "desktop")}
+          ${getOverlayCss(advanced.overlay)}
         }
-          ${
-            getBackgroundCss(
-              advanced.background,
-              "hbHelloBlock-123456",
-              "desktop"
-            )
-          }
+        
         
         `}
       </style>
