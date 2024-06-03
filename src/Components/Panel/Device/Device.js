@@ -28,6 +28,7 @@ export const Device = compose(
     position = "horizontal",
     device,
     setDevice,
+    onChange = ()=> {}
   }) => {
     // const [show, setShow] = useState(false);
     const deviceValue = [
@@ -50,6 +51,7 @@ export const Device = compose(
                 onClick={() => {
                   // setShow(false);
                   setDevice(label);
+                  onChange(label.toLowerCase());
                 }}
                 className={`advancedOptionssingle-device ${
                   name === device ? "active" : ""

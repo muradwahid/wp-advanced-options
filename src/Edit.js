@@ -1,38 +1,52 @@
 import { InspectorControls } from "@wordpress/block-editor";
 import { useEffect } from "react";
-import {
-  AdvancedOptions,
-} from "./Components";
-import { getOverlayCss } from "./Components/utils/getCss";
+import { AdvancedOptions } from "./Components";
+import { getAdvancedCSS, getVisibilityCSS } from "./Components/utils/getCss";
 
 const Edit = (props) => {
-  const { className, setAttributes, clientId, attributes, cId } = props;
+  const { className, setAttributes, clientId, attributes } = props;
+  const { cId } = attributes;
   useEffect(() => {
     clientId && setAttributes({ cId: clientId.substring(0, 10) });
   }, [clientId]); // Set & Update clientId to cId
   const { advanced } = attributes;
-
-  // useEffect(() => {
-  // console.log(advanced.background)
-  // }, [advanced.background])
+  const {customCss}=advanced
+  useEffect(() => {
+  // console.log(advanced.overlay)
+  }, [advanced.overlay])
 
   // console.log({background:attributes.advanced.background});
 
+  // useEffect(() => {
+  //   const element = document.getElementById("hbHelloBlock-123456");
+  //   const elementRect = element.getBoundingClientRect();
+  //   const viewportHeight =
+  //     window.innerHeight || document.documentElement.clientHeight;
+  //   // console.log(elementRect.top, elementRect.bottom, viewportHeight);
+  //   if (elementRect.top >= 0 && elementRect.bottom <= viewportHeight) {
+  //     const btnClassList = element?.classList;
+
+  //     if (btnClassList) {
+  //       element.setAttribute("data-aos", advanced.animation.type);
+  //       btnClassList.remove("aos-init");
+  //       btnClassList.remove("aos-animate");
+  //       setTimeout(() => {
+  //         btnClassList.add("aos-init");
+  //         btnClassList.add("aos-animate");
+  //       }, 500);
+  //     }
+  //   }
+  // });
+
+  // console.log(attributes.advanced.background.normal); 
   return (
     <div
       className={className}
-      id={`hbHelloBlock-123456`}
+      id={`hbHelloBlock-${cId}`}
       data-bblocks-advanced={JSON.stringify(attributes.advanced)}
     >
-      <style>
-        {`
-        #hbHelloBlock-123456{
-          ${getOverlayCss(advanced.overlay)}
-        }
-        
-        
-        `}
-      </style>
+      {/* <style>{`${getAdvancedCSS(advanced, "hbHelloBlock-123456").replace(/\s+/g, " ").trim()}`}</style> */}
+      {/* <style>{`${getAdvancedCSS(advanced, "hbHelloBlock-123456")}`}</style> */}
 
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur

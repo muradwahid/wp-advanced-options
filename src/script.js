@@ -2,9 +2,10 @@ import './style.scss';
 import { createRoot } from 'react-dom/client';
 // Block Name
 function FrontEnd({ attributes }) {
-	const { advanced } = attributes;
+  const { advanced } = attributes;
+  
 	return (
-    <div data-aos={advanced.animation.type}>
+    <div>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea maxime
         recusandae voluptate deleniti quod ipsam quisquam ex reiciendis commodi

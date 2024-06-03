@@ -1,54 +1,128 @@
-document.addEventListener("DOMContentLoaded", () => {
+import AOS from "../../../assets/assets/aos";
+import "../../../assets/css/aos.css"
+window.AOS = AOS;
+window.onload = () => {
   const advancedEls = document.querySelectorAll("[data-bblocks-advanced]");
   let css = "";
-  // console.log(advancedEls);
-
   advancedEls.forEach((el) => {
     const advanced = JSON.parse(el.dataset.bblocksAdvanced);
-    console.log(el.id);
+    const { animation } = advanced;
+    
     css += generateCSS(advanced, el.id);
+
+    if (animation) {
+      loadScrollAnimation(el, animation);
+    }
 
     el.removeAttribute("data-bblocks-advanced");
   });
 
-
-  // const observer = new MutationObserver((mutations) => {
-  //   mutations.forEach((mutation) => {
-  //     if (
-  //       mutation.type === "attributes" &&
-  //       mutation.attributeName === "data-bblocks-advanced"
-  //     ) {
-  //       console.log(
-  //         `Status changed to: ${advancedEls.getAttribute("data-bblocks-advanced")}`
-  //       );
-  //     }
-  //   });
-  // });
-
-  // observer.observe(advancedEls, { attributes: true });
-
-
   const style = document.createElement("style");
   style.innerHTML = css;
   document.head.appendChild(style);
-});
+};
+
+const loadScrollAnimation = (el, animation) => {
+  const { type, speed, delay } = animation;
+
+  if (!el.classList.contains("aos-init")) {
+    el.classList.add("aos-init");
+    el.setAttribute("data-aos", type);
+    el.setAttribute("data-aos-duration", speed);
+    el.setAttribute("data-aos-delay", delay);
+  }
+
+  window.AOS.init();
+  window.addEventListener("scroll", () => {
+    window.AOS.refresh();
+  });
+};
+
+// window.onload = () => {
+//   const advancedEls = document.querySelectorAll("[data-bblocks-advanced]");
+//   let css = "";
+
+//   advancedEls.forEach((el) => {
+//     const advanced = JSON.parse(el.dataset.bblocksAdvanced);
+
+//     css += generateCSS(advanced, el.id);
+//     const aosInit = AOS?.init();
+//     loadAnimation(el, advanced);
+
+//     window.addEventListener("scroll", () => {
+//       AOS.refresh();
+
+//       loadAnimation(el, advanced);
+//     });
+
+//     el.removeAttribute("data-bblocks-advanced");
+//   });
+
+//   const style = document.createElement("style");
+//   style.innerHTML = css;
+//   document.head.appendChild(style);
+// };
+
+// const loadAnimation = (el, advanced) => {
+//   const elementRect = el.getBoundingClientRect();
+
+//   const { animation } = advanced;
+//   const { type, speed, delay } = animation;
+
+//   const viewportHeight =
+//     window.innerHeight || document.documentElement.clientHeight;
+//   const isInViewport =
+//     elementRect.top >= 0 && elementRect.bottom <= viewportHeight;
+
+//   if (!el.classList.contains("aos-init")) {
+//     el.classList.add("aos-init");
+//     el.setAttribute("data-aos", type);
+//     el.setAttribute("data-duration", speed);
+//     el.setAttribute("data-delay", delay);
+//   }
+//   console.log(isInViewport);
+//   if (isInViewport) {
+//     el.classList.add("aos-animate");
+//   } else {
+//     el.classList.remove("aos-animate");
+//   }
+// };
+
+// const loadAnimation = (el, advanced) => {
+//   const elementRect = el.getBoundingClientRect();
+//   const viewportHeight =
+//     window.innerHeight || document.documentElement.clientHeight;
+
+//   const isInViewport =
+//     elementRect.top >= 0 && elementRect.bottom <= viewportHeight;
+//   // console.log(isInViewport);
+//   if (isInViewport) {
+//     const animationClassList = el.classList;
+//     if (animationClassList) {
+//       el.setAttribute("data-aos", advanced.animation.type);
+//       if (!animationClassList.contains("aos-init")) {
+//         animationClassList.add("aos-init");
+//       }
+//       setTimeout(() => {
+//         animationClassList.add("aos-animate");
+//       }, 500);
+//     }
+//   } else {
+//     if (el.classList) {
+//       el.classList.remove("aos-init");
+//       el.classList.remove("aos-animate");
+//     }
+//   }
+// };
 
 const generateCSS = (advanced, id) => {
   const { dimentions } = advanced;
-
   return `
     #${id}{
       background-color: #333;
     }
   `;
 };
-
-
-
-
-
-
-
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   const advancedEls = document.querySelectorAll("[data-bblocks-advanced]");
@@ -103,4 +177,19 @@ const generateCSS = (advanced, id) => {
 //   advancedEls.forEach((el) => {
 //     observer.observe(el, { attributes: true });
 //   });
-// }); 
+// });
+
+// const observer = new MutationObserver((mutations) => {
+//   mutations.forEach((mutation) => {
+//     if (
+//       mutation.type === "attributes" &&
+//       mutation.attributeName === "data-bblocks-advanced"
+//     ) {
+//       console.log(
+//         `Status changed to: ${advancedEls.getAttribute("data-bblocks-advanced")}`
+//       );
+//     }
+//   });
+// });
+
+// observer.observe(advancedEls, { attributes: true });

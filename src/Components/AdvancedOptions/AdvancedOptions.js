@@ -13,9 +13,9 @@ import BorderControl from "../Panel/BorderControl/BorderControl";
 import CustomCodeEditor from "../Panel/CustomCodeEditor/CustomCodeEditor";
 import { Tab } from "../Panel/Tab/Tab";
 import VisibilityOptions from "../Panel/VisibilityOptions/VisibilityOptions";
+import { lowerCase } from "../utils/functions";
 import { unitOptions } from "../utils/options";
 import "./advancedOptionsStyle.css";
-import { lowerCase } from "../utils/functions";
 
 const AdvancedOptions = ({
   attributes,
@@ -28,10 +28,8 @@ const AdvancedOptions = ({
   isResponsive = true,
   isAnimation = true,
   isCustomCss = true,
-  device
+  device,
 }) => {
-  const [shadowTab, setShadowTab] = useState("normal");
-
   const { advanced } = attributes;
   const {
     dimension,
@@ -43,8 +41,9 @@ const AdvancedOptions = ({
     animation,
     customCss,
   } = advanced || {};
+
   useEffect(() => {
-    console.log(borderShadow)
+    // console.log(borderShadow);
   }, [borderShadow, device]);
   return (
     <div className="bplAdvControls">
@@ -53,49 +52,50 @@ const AdvancedOptions = ({
         {isDimension && (
           <PanelBody title="Margin & Padding" initialOpen={false}>
             <div>
-            <div style={{ position: "relative" }}>
-              <Device
-                style={{ position: "absolute", right: "0px", top: "2px" }}
-              />
-              <BBoxControl
-                label="Margin"
-                units={unitOptions}
-                values={dimension?.margin?.[device]}
-                onChange={(val) =>
-                  setAttributes({
-                    advanced: {
-                      ...advanced,
-                      dimension: {
-                        ...dimension,
-                        margin: { ...dimension?.margin, [device]: val },
+              <div style={{ position: "relative" }}>
+                <Device
+                  style={{ position: "absolute", right: "0px", top: "2px" }}
+                  onChange={val=>console.log(val)}
+                />
+                <BBoxControl
+                  label="Margin"
+                  units={unitOptions}
+                  values={dimension?.margin?.[device]}
+                  onChange={(val) =>
+                    setAttributes({
+                      advanced: {
+                        ...advanced,
+                        dimension: {
+                          ...dimension,
+                          margin: { ...dimension?.margin, [device]: val },
+                        },
                       },
-                    },
-                  })
-                }
-              />
-            </div>
-            <div style={{ position: "relative" }}>
-              <Device
-                style={{ position: "absolute", right: "0px", top: "2px" }}
-              />
-              <BBoxControl
-                label="Padding"
-                units={unitOptions}
-                values={dimension?.padding?.[device]}
-                onChange={(val) =>
-                  setAttributes({
-                    advanced: {
-                      ...advanced,
-                      dimension: {
-                        ...dimension,
-                        padding: { ...dimension?.padding, [device]: val },
+                    })
+                  }
+                />
+              </div>
+              <div style={{ position: "relative" }}>
+                <Device
+                  style={{ position: "absolute", right: "0px", top: "2px" }}
+                />
+                <BBoxControl
+                  label="Padding"
+                  units={unitOptions}
+                  values={dimension?.padding?.[device]}
+                  onChange={(val) =>
+                    setAttributes({
+                      advanced: {
+                        ...advanced,
+                        dimension: {
+                          ...dimension,
+                          padding: { ...dimension?.padding, [device]: val },
+                        },
                       },
-                    },
-                  })
-                }
-              />
+                    })
+                  }
+                />
+              </div>
             </div>
-          </div>
           </PanelBody>
         )}
         {/* background */}
@@ -129,29 +129,39 @@ const AdvancedOptions = ({
         {isBorderShadow && (
           <PanelBody
             title="Border & Shadow"
-            initialOpen={true}
+            initialOpen={false}
             className="bPlAdvPanelBody"
           >
             <Tab
               options={["normal", "hover"]}
-              value={shadowTab}
-              onChange={(val) => setShadowTab(val)}
+              value={borderShadow.type}
+              onChange={(val) =>
+                setAttributes({
+                  advanced: {
+                    ...advanced,
+                    borderShadow: { ...borderShadow, type: val },
+                  },
+                })
+              }
             />
             <BorderControl
-              value={borderShadow[shadowTab].border}
+              value={borderShadow[borderShadow.type].border}
               onChange={(val) =>
                 setAttributes({
                   advanced: {
                     ...advanced,
                     borderShadow: {
                       ...borderShadow,
-                      [shadowTab]: { ...borderShadow[shadowTab], border: val },
+                      [borderShadow.type]: {
+                        ...borderShadow[borderShadow.type],
+                        border: val,
+                      },
                     },
                   },
                 })
               }
             />
-            {shadowTab === "hover" && (
+            {borderShadow.type === "hover" && (
               <div className="advExtraMargin">
                 <RangeControl
                   label="Border Radius Transition"
@@ -174,14 +184,17 @@ const AdvancedOptions = ({
               </div>
             )}
             <BMultiShadowControl
-              value={borderShadow[shadowTab].shadow}
+              value={borderShadow[borderShadow.type].shadow}
               onChange={(val) =>
                 setAttributes({
                   advanced: {
                     ...advanced,
                     borderShadow: {
                       ...borderShadow,
-                      [shadowTab]: { ...borderShadow[shadowTab], shadow: val },
+                      [borderShadow.type]: {
+                        ...borderShadow[borderShadow.type],
+                        shadow: val,
+                      },
                     },
                   },
                 })

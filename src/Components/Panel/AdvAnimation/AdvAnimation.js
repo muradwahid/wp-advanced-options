@@ -1,29 +1,28 @@
 import { RangeControl, SelectControl } from "@wordpress/components";
-import React, { useEffect } from "react";
+import React from "react";
 import Label from "../Label/Label";
-import AOS from "./animationStyle/aos";
-import "./animationStyle/aos.css";
+// import AOS from "./assets/aos";
+// import "./assets/aos.css";
 import { animationOptions } from "./options";
-window["AOS"] = AOS;
+// window["AOS"] = AOS;
 const AdvAnimation = ({ value, onChange }) => {
-  useEffect(() => {
-    window["AOS"]?.init();
-  }, []);
+  // useEffect(() => {
+  //   window["AOS"]?.init();
+  // }, []);
+  // useEffect(() => {
+  //   const animatedWrapper = document.querySelector("#hbHelloBlock-123456");
+  //   const btnClassList = animatedWrapper?.classList;
 
-  useEffect(() => {
-    const animatedWrapper = document.querySelector("#hbHelloBlock-123456");
-    const btnClassList = animatedWrapper?.classList;
-
-    if (btnClassList) {
-      animatedWrapper.setAttribute("data-aos", value.type);
-      btnClassList.remove("aos-init");
-      btnClassList.remove("aos-animate");
-      setTimeout(() => {
-        btnClassList.add("aos-init");
-        btnClassList.add("aos-animate");
-      }, 500);
-    }
-  }, [value.type, value.delay, value.speed]);
+  //   if (btnClassList) {
+  //     animatedWrapper.setAttribute("data-aos", value.type);
+  //     btnClassList.remove("aos-init");
+  //     btnClassList.remove("aos-animate");
+  //     setTimeout(() => {
+  //       btnClassList.add("aos-init");
+  //       btnClassList.add("aos-animate");
+  //     }, 500);
+  //   }
+  // }, [value.type, value.delay, value.speed]);
 
   return (
     <div>

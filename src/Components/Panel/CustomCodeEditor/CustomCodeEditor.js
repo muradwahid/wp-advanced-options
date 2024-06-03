@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useCallback } from "react";
 import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-monokai";
 
-const CustomCodeEditor = ({ value, onChange,height="300px",width="100%" }) => {
+const CustomCodeEditor = ({
+  value,
+  onChange,
+  height = "300px",
+  width = "100%",
+}) => {
   const id = Math.floor(Math.random() * 99999999);
+
+  let timeout;
+  const debouncedOnChange = useCallback(
+    (newVal) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        onChange(newVal);
+      }, 600);
+    },
+    [onChange, timeout]
+  );
 
   return (
     <div>
@@ -15,7 +31,7 @@ const CustomCodeEditor = ({ value, onChange,height="300px",width="100%" }) => {
         theme="monokai"
         name={`advEditor-${id}`}
         // onLoad={this.onLoad}
-        onChange={val=>onChange(val)}
+        onChange={debouncedOnChange}
         fontSize={14}
         lineHeight={19}
         height={height}

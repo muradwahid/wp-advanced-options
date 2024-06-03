@@ -103,6 +103,7 @@
     "hue": 0
   },
   "borderShadow": {
+    "type": "normal",
     "normal": { "border": {}, "shadow": {} },
     "hover": { "border": {}, "transition": "", "shadow": {} }
   },
@@ -119,5 +120,6 @@
     "type": "none",
     "speed": 0.05,
     "delay": 0.05
-  }
+  },
+  "customCss":""
 }

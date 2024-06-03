@@ -10,6 +10,10 @@
     "advanced": {
       "type": "object",
       "default": {
+        "dimension": {
+          "padding": {},
+          "margin": {}
+        },
         "background": {
           "normal": {
             "type": "color",
@@ -19,7 +23,7 @@
               "radialType": "ellipse",
               "colors": [
                 { "color": "", "position": 0 },
-                { "color": "", "position": 0 }
+                { "color": "", "position": 80 }
               ],
               "centerPositions": { "x": 0, "y": 0 },
               "angel": 90
@@ -39,7 +43,7 @@
               "radialType": "ellipse",
               "colors": [
                 { "color": "", "position": 0 },
-                { "color": "", "position": 0 }
+                { "color": "", "position": 80 }
               ],
               "centerPositions": { "x": 0, "y": 0 },
               "angel": 90
@@ -110,15 +114,27 @@
           "hue": 0
         },
         "borderShadow": {
+          "type":"normal",
           "normal": { "border": {}, "shadow": {} },
           "hover": { "border": {}, "transition": "", "shadow": {} }
+        },
+        "visibility": {
+          "zIndex": { "desktop": "", "tablet": "", "mobile": "" },
+          "overflow": "default"
+        },
+        "responsiveControl": {
+          "desktop": false,
+          "tablet": false,
+          "mobile": false
         },
         "animation": {
           "type": "none",
           "speed": 0.05,
           "delay": 0.05
-        }
+        },
+        "customCss": ""
       }
+
     },
     "align": {
       "type": "string",

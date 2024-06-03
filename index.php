@@ -43,6 +43,10 @@ if(!class_exists( 'AOGPlugin' ) ){
     }
 
     function enqueueBlockAssets(){
+      // wp_enqueue_style( 'aos', AOG_DIR_URL. 'assets/css/aos.css', [], AOG_VERSION );
+      // wp_enqueue_script( 'aos', AOG_DIR_URL. 'assets/js/aos.js', [], AOG_VERSION, true );
+      // wp_enqueue_script( 'aog-advanced-style-script', AOG_DIR_URL. 'dist/advanced-style.js', [ 'aos' ], AOG_VERSION, true );
+
       wp_enqueue_script( 'aog-advanced-style-script', AOG_DIR_URL. 'dist/advanced-style.js', [], AOG_VERSION, true );
     }
   }
