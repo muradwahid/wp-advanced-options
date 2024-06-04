@@ -1,7 +1,6 @@
 import { InspectorControls } from "@wordpress/block-editor";
 import { useEffect } from "react";
 import { AdvancedOptions } from "./Components";
-import { getAdvancedCSS, getVisibilityCSS } from "./Components/utils/getCss";
 
 const Edit = (props) => {
   const { className, setAttributes, clientId, attributes } = props;
@@ -10,10 +9,10 @@ const Edit = (props) => {
     clientId && setAttributes({ cId: clientId.substring(0, 10) });
   }, [clientId]); // Set & Update clientId to cId
   const { advanced } = attributes;
-  const {customCss}=advanced
+  const { customCss } = advanced;
   useEffect(() => {
-  // console.log(advanced.overlay)
-  }, [advanced.overlay])
+    // console.log(advanced.overlay)
+  }, [advanced.overlay]);
 
   // console.log({background:attributes.advanced.background});
 
@@ -38,11 +37,13 @@ const Edit = (props) => {
   //   }
   // });
 
-  // console.log(attributes.advanced.background.normal); 
+  // console.log(attributes.advanced.background.normal);
+
+  const elId = `hbHelloBlock-${cId}`;
   return (
     <div
       className={className}
-      id={`hbHelloBlock-${cId}`}
+      id={elId}
       data-bblocks-advanced={JSON.stringify(attributes.advanced)}
     >
       {/* <style>{`${getAdvancedCSS(advanced, "hbHelloBlock-123456").replace(/\s+/g, " ").trim()}`}</style> */}
@@ -58,6 +59,7 @@ const Edit = (props) => {
         <AdvancedOptions
           attributes={attributes}
           setAttributes={setAttributes}
+          elId={elId}
         />
       </InspectorControls>
     </div>

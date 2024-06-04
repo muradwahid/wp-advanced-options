@@ -277,7 +277,7 @@ export const getBorderShadowCSS = (props) => {
     //   shadow: `box-shadow:${getShadowCSS(normal?.shadow)};`,
     // },
     hover: `getBorderCSS(hover?.border)
-    box-shadow:${getShadowCSS(hover?.shadow)};`,
+    box-shadow:${getShadowCSS(hover?.shadow)};`
     // hover: {
     //   border: getBorderCSS(hover?.border),
     //   shadow: `box-shadow:${getShadowCSS(hover?.shadow)};`,
@@ -310,7 +310,6 @@ export const getResponsiveControl = (props) => {
 const getObjKey = (obj) => {
   return Object.keys(obj);
 };
-
 // advanced css
 export const getAdvancedCSS = (advanced, id) => {
   const {
@@ -321,11 +320,19 @@ export const getAdvancedCSS = (advanced, id) => {
     visibility,
     responsiveControl,
     animation,
-    customCss,
+    customCss
   } = advanced || {};
   return `#${id}{
     position:relative;
     ${getObjKey(dimension) ? getDimensionCSS(dimension, "desktop") : ""}
+    ${getObjKey(background)? getBackgroundCSS(background).normal.background: ""}
+    ${getObjKey(background) ? getBackgroundCSS(background).normal.desktop : ""}
+    ${getObjKey(borderShadow) ? getBorderShadowCSS(borderShadow).normal : ""}
+    ${getObjKey(visibility) ? getVisibilityCSS(visibility).global : ""}
+    ${getObjKey(visibility) ? getVisibilityCSS(visibility).desktop : ""}
+    ${getObjKey(responsiveControl) ? getResponsiveControl(responsiveControl).desktop : ""}
+  }
+  #${id}bpl{
     ${
       getObjKey(background)
         ? `transition:background ${
@@ -333,25 +340,9 @@ export const getAdvancedCSS = (advanced, id) => {
           }s ease-in-out;`
         : ""
     }
-    ${
-      getObjKey(background)
-        ? getBackgroundCSS(background).normal.background
-        : ""
-    }
-    ${getObjKey(background) ? getBackgroundCSS(background).normal.desktop : ""}
-    ${getObjKey(borderShadow) ? getBorderShadowCSS(borderShadow).normal : ""}
-    ${getObjKey(visibility) ? getVisibilityCSS(visibility).global : ""}
-    ${getObjKey(visibility) ? getVisibilityCSS(visibility).desktop : ""}
-    ${
-      getObjKey(responsiveControl)
-        ? getResponsiveControl(responsiveControl).desktop
-        : ""
-    }}
   }
   #${id}:hover{
-    ${
-      getObjKey(background) ? getBackgroundCSS(background).hover.background : ""
-    }
+    ${getObjKey(background) ? getBackgroundCSS(background).hover.background : ""}
     ${getObjKey(background) ? getBackgroundCSS(background).hover.desktop : ""}
     ${getObjKey(borderShadow) ? getBorderShadowCSS(borderShadow).hover : ""}
   }
@@ -432,3 +423,4 @@ export const getAdvancedCSS = (advanced, id) => {
     .replace(/\s+/g, " ")
     .trim();
 };
+

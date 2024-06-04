@@ -37,7 +37,7 @@
           },
           "hover": {
             "type": "color",
-            "color": "#0000",
+            "color": "",
             "gradient": {
               "type": "linear",
               "radialType": "ellipse",

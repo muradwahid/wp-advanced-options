@@ -6,10 +6,11 @@ import "./style.css";
 
 export const Device = compose(
   withSelect((select) => {
+    const {__experimentalGetPreviewDeviceType } =
+      select("core/edit-post");
+
     return {
-      device: select("core/edit-post")
-        .__experimentalGetPreviewDeviceType()
-        ?.toLowerCase(),
+      device:__experimentalGetPreviewDeviceType()?.toLowerCase(),
     };
   }),
   withDispatch((dispatch) => {
@@ -28,7 +29,7 @@ export const Device = compose(
     position = "horizontal",
     device,
     setDevice,
-    onChange = ()=> {}
+    onChange = () => {},
   }) => {
     // const [show, setShow] = useState(false);
     const deviceValue = [
