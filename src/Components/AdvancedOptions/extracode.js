@@ -47,17 +47,41 @@ window["AOS"] = AOS;
 document.addEventListener("DOMContentLoaded", () => {
   const advancedEls = document.querySelectorAll("[data-bblocks-advanced]");
   advancedEls.forEach((el) => {
-    // const advanced = JSON.parse(el.dataset.bblocksAdvanced);
-    // const head = document.head;
-    // let style = document.createElement("style");
-
-    // style.innerHTML = getAdvancedCSS(advanced, el.id);
-    // head.appendChild(style);
-    // loadScrollAnimation(el, advanced.animation);
+    const advanced = JSON.parse(el.dataset.bblocksAdvanced);
     updateStyle(el);
-    el.removeAttribute("data-bblocks-advanced");
+    loadScrollAnimation(el, advanced?.animation);
+
+    frontViewPortObserver.observe(el);
+    // el.removeAttribute("data-bblocks-advanced");
   });
 });
+
+const frontViewPortObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      const classListAos = entry.target.classList;
+      const id = entry.target.id;
+      const advanced = JSON.parse(entry.target.dataset.bblocksAdvanced);
+      const { animation } = advanced;
+      if (entry.isIntersecting) {
+        // classListAos.add("aos-animate");
+        setTimeout(() => {
+          classListAos.add(`${id}bpl`);
+        }, 1000 * animation.speed + 600);
+      } else {
+        // classListAos.remove("aos-animate");
+        classListAos.remove(`${id}bpl`);
+      }
+      window.AOS.init();
+      window.addEventListener("scroll", () => {
+        window.AOS.refresh();
+      });
+    });
+  },
+  {
+    threshold: 0.5,
+  }
+);
 
 //backend style
 const observer = new MutationObserver((mutations) => {
@@ -113,6 +137,15 @@ const animationAttr = new MutationObserver((mutations) => {
         val.setAttribute("data-aos-duration", animation.speed);
         val.setAttribute("data-aos-delay", animation.delay);
         val.setAttribute("data-aos", animation.type);
+        if (!val.classList.contains("aos-init")) {
+          val.classList.add("aos-init");
+          val.setAttribute("data-aos", animation.type);
+        }
+
+        window.AOS.init();
+        window.addEventListener("scroll", () => {
+          window.AOS.refresh();
+        });
       });
     }
   });
@@ -159,9 +192,9 @@ const elVisibilityObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       const classListAos = entry.target.classList;
+      const id = entry.target.id;
       const advanced = JSON.parse(entry.target.dataset.bblocksAdvanced);
       const { animation } = advanced;
-      const id = entry.target.id;
       if (entry.isIntersecting) {
         // Element is now in the viewport
         // console.log("Element is visible:", entry.target);
@@ -173,7 +206,7 @@ const elVisibilityObserver = new IntersectionObserver(
           classListAos.add("aos-animate");
           setTimeout(() => {
             classListAos.add(`${id}bpl`);
-          }, 600);
+          }, 1000 * animation.speed + 500);
         }
       } else {
         classListAos.remove("aos-animate");
@@ -200,14 +233,14 @@ const observerAttr = new MutationObserver((mutations) => {
       const advanced = JSON.parse(targetElement.dataset.bblocksAdvanced);
       const { animation } = advanced;
       updateStyle(targetElement);
-      loadScrollAnimation(targetElement, animation);
+      // loadScrollAnimation(targetElement, animation);
     }
   });
 });
 
 function updateStyle(el) {
   const advanced = JSON.parse(el.dataset.bblocksAdvanced);
-  loadScrollAnimation(el, advanced?.animation);
+  // loadScrollAnimation(el, advanced?.animation);
   const newCSS = getAdvancedCSS(advanced, el.id);
   const style = document.createElement("style");
   // console.log(el)
@@ -236,39 +269,41 @@ const loadScrollAnimation = (el, animation) => {
     window.AOS.refresh();
   });
 
-  const elVisibilityObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const classListAos = entry.target.classList;
-        const id = entry.target.id;
-        if (entry.isIntersecting) {
-          // Element is now in the viewport
-          // console.log("Element is visible:", entry.target);
-          if (!classListAos.contains("aos-init")) {
-            classListAos.add("aos-init");
-          }
-          if (classListAos.contains("aos-init")) {
-            window.AOS.init();
-            classListAos.add("aos-animate");
-            setTimeout(() => {
-              classListAos.add(`${id}bpl`);
-            }, 600);
-          }
-        } else {
-          classListAos.remove("aos-animate");
-          classListAos.remove(`${id}bpl`);
-        }
-        window.AOS.init();
-        window.addEventListener("scroll", () => {
-          window.AOS.refresh();
-        });
-      });
-    },
-    {
-      threshold: 0.5,
-    }
-  );
-  elVisibilityObserver.observe(el);
+  // const elVisibilityObserver = new IntersectionObserver(
+  //   (entries) => {
+  //     entries.forEach((entry) => {
+  //       const classListAos = entry.target.classList;
+  //       const id = entry.target.id;
+  //       const advanced = JSON.parse(entry.target.dataset.bblocksAdvanced);
+  //       const { animation } = advanced;
+  //       if (entry.isIntersecting) {
+  //         // Element is now in the viewport
+  //         // console.log("Element is visible:", entry.target);
+  //         if (!classListAos.contains("aos-init")) {
+  //           classListAos.add("aos-init");
+  //         }
+  //         if (classListAos.contains("aos-init")) {
+  //           window.AOS.init();
+  //           classListAos.add("aos-animate");
+  //           setTimeout(() => {
+  //             classListAos.add(`${id}bpl`);
+  //           }, 1000*animation.speed + 500);
+  //         }
+  //       } else {
+  //         classListAos.remove("aos-animate");
+  //         classListAos.remove(`${id}bpl`);
+  //       }
+  //       window.AOS.init();
+  //       window.addEventListener("scroll", () => {
+  //         window.AOS.refresh();
+  //       });
+  //     });
+  //   },
+  //   {
+  //     threshold: 0.5,
+  //   }
+  // );
+  // elVisibilityObserver.observe(el);
 };
 
 observer.observe(document.body, { childList: true, subtree: true });

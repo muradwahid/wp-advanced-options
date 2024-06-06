@@ -1,5 +1,19 @@
 import './panelAlign.css';
 
+/**
+ * PanelAlign Component
+ * 
+ * @param {object} props - The props object
+ * @param {string} props.label - The label for the panel align
+ * @param {array} props.icons - The array of icons for panel align
+ * @param {function} props.onChange - The function to handle changes in the panel align value
+ * @param {string} props.value - The value of the panel align
+ * @param {object} props.style - The style object for the panel align
+ * @param {(left | right | top | bottom)} props.labelPosition - The position of the label
+ * @param {string} props.className - The class name for the panel align
+ * @returns {JSX.Element} React component
+ */
+
 export const PanelAlign = (props) => {
   const {
     label,

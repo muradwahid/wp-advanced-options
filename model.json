@@ -1,125 +1,125 @@
 {
-  "dimension": {
-    "padding": {},
-    "margin": {}
-  },
-  "background": {
-    "normal": {
-      "type": "color",
-      "color": "",
-      "gradient": {
-        "type": "linear",
-        "radialType": "ellipse",
-        "colors": [
-          { "color": "", "position": 0 },
-          { "color": "", "position": 80 }
-        ],
-        "centerPositions": { "x": 0, "y": 0 },
-        "angel": 90
+  "advanced": {
+    "type": "object",
+    "default": {
+      "dimension": {
+        "padding": {},
+        "margin": {}
       },
-      "img": {
-        "url": "",
-        "desktop": { "position": "" },
-        "tablet": { "position": "" },
-        "mobile": { "position": "" }
-      }
-    },
-    "hover": {
-      "type": "color",
-      "color": "#0000",
-      "gradient": {
-        "type": "linear",
-        "radialType": "ellipse",
-        "colors": [
-          { "color": "", "position": 0 },
-          { "color": "", "position": 80 }
-        ],
-        "centerPositions": { "x": 0, "y": 0 },
-        "angel": 90
-      },
-      "transition": 0.3,
-      "img": {
-        "url": "",
-        "desktop": {},
-        "tablet": {},
-        "mobile": {}
-      }
-    },
-    "hoverType": "normal"
-  },
-  "overlay": {
-    "isEnabled": false,
-    "colors": {
-      "normal": {
-        "type": "color",
-        "color": "",
-        "gradient": {
-          "type": "linear",
-          "radialType": "ellipse",
-          "colors": [
-            { "color": "", "position": 0 },
-            { "color": "", "position": 0 }
-          ],
-          "centerPositions": { "x": 0, "y": 0 },
-          "angel": 90
+      "background": {
+        "normal": {
+          "type": "color",
+          "color": "",
+          "gradient": {
+            "type": "linear",
+            "radialType": "ellipse",
+            "colors": [
+              { "color": "", "position": 0 },
+              { "color": "", "position": 80 }
+            ],
+            "centerPositions": { "x": 0, "y": 0 },
+            "angel": 90
+          },
+          "img": {
+            "url": "",
+            "desktop": { "position": "" },
+            "tablet": { "position": "" },
+            "mobile": { "position": "" }
+          }
         },
-        "img": {
-          "url": "",
-          "desktop": { "position": "" },
-          "tablet": { "position": "" },
-          "mobile": { "position": "" }
-        }
-      },
-      "hover": {
-        "type": "color",
-        "color": "#0000",
-        "gradient": {
-          "type": "linear",
-          "radialType": "ellipse",
-          "colors": [
-            { "color": "", "position": 0 },
-            { "color": "", "position": 0 }
-          ],
-          "centerPositions": { "x": 0, "y": 0 },
-          "angel": 90
+        "hover": {
+          "type": "color",
+          "color": "",
+          "gradient": {
+            "type": "linear",
+            "radialType": "ellipse",
+            "colors": [
+              { "color": "", "position": 0 },
+              { "color": "", "position": 80 }
+            ],
+            "centerPositions": { "x": 0, "y": 0 },
+            "angel": 90
+          },
+          "transition": 0.3,
+          "img": {
+            "url": "",
+            "desktop": {},
+            "tablet": {},
+            "mobile": {}
+          }
         },
-        "transition": 0.3,
-        "img": {
-          "url": "",
-          "desktop": {},
-          "tablet": {},
-          "mobile": {}
-        }
+        "hoverType": "normal"
       },
-      "hoverType": "normal"
-    },
-    "opacity": 1,
-    "blend": "normal",
-    "isCssFilter": false,
-    "blur": 0,
-    "brightness": 100,
-    "contrast": 100,
-    "saturation": 100,
-    "hue": 0
-  },
-  "borderShadow": {
-    "type": "normal",
-    "normal": { "border": {}, "shadow": {} },
-    "hover": { "border": {}, "transition": "", "shadow": {} }
-  },
-  "visibility": {
-    "zIndex": { "desktop": "", "tablet": "", "mobile": "" },
-    "overflow": "default"
-  },
-  "responsiveControl": {
-    "desktop": false,
-    "tablet": false,
-    "mobile": false
-  },
-  "animation": {
-    "type": "none",
-    "speed": 0.05,
-    "delay": 0.05
-  },
-  "customCss":""
+      "overlay": {
+        "isEnabled": false,
+        "colors": {
+          "normal": {
+            "type": "color",
+            "color": "",
+            "gradient": {
+              "type": "linear",
+              "radialType": "ellipse",
+              "colors": [
+                { "color": "", "position": 0 },
+                { "color": "", "position": 0 }
+              ],
+              "centerPositions": { "x": 0, "y": 0 },
+              "angel": 90
+            },
+            "img": {
+              "url": "",
+              "desktop": { "position": "" },
+              "tablet": { "position": "" },
+              "mobile": { "position": "" }
+            }
+          },
+          "hover": {
+            "type": "color",
+            "color": "#0000",
+            "gradient": {
+              "type": "linear",
+              "radialType": "ellipse",
+              "colors": [
+                { "color": "", "position": 0 },
+                { "color": "", "position": 0 }
+              ],
+              "centerPositions": { "x": 0, "y": 0 },
+              "angel": 90
+            },
+            "transition": 0.3,
+            "img": {
+              "url": "",
+              "desktop": {},
+              "tablet": {},
+              "mobile": {}
+            }
+          },
+          "hoverType": "normal"
+        },
+        "opacity": 1,
+        "blend": "normal",
+        "isCssFilter": false,
+        "blur": 0,
+        "brightness": 100,
+        "contrast": 100,
+        "saturation": 100,
+        "hue": 0
+      },
+      "borderShadow": {
+        "type": "normal",
+        "normal": { "border": {}, "shadow": {} },
+        "hover": { "border": {}, "transition": "", "shadow": {} }
+      },
+      "visibility": {
+        "zIndex": { "desktop": "", "tablet": "", "mobile": "" },
+        "overflow": "default"
+      },
+      "responsiveControl": {
+        "desktop": false,
+        "tablet": false,
+        "mobile": false
+      },
+      "customCss": ""
+    }
+  }
 }

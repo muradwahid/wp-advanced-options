@@ -5,12 +5,25 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-monokai";
 
-const CustomCodeEditor = ({
-  value,
-  onChange,
-  height = "300px",
-  width = "100%",
-}) => {
+
+/**
+ * CustomCodeEditor Component
+ * 
+ * @param {object} props - The props object
+ * @param {string} props.value - The value of the code editor
+ * @param {function} props.onChange - The function to handle changes in the code editor value
+ * @param {string} props.height - The height of the code editor
+ * @param {string} props.width - The width of the code editor
+ * @returns {JSX.Element} React component
+ */
+
+const CustomCodeEditor = (props) => {
+  const {
+    value,
+    onChange,
+    height = "300px",
+    width = "100%",
+  } = props;
   const id = Math.floor(Math.random() * 99999999);
 
   let timeout;

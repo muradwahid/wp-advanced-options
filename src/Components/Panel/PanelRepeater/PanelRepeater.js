@@ -1,6 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import "./panelRepeater.css";
-
+/**
+ * PanelRepeater Component
+ * 
+ * @param {object} props - The props object
+ * @param {React.ReactNode} props.children - The children components
+ * @param {string} props.title - The title of the panel repeater
+ * @param {number} props.length - The length of the panel repeater
+ * @param {function} props.onChange - The function to handle changes in the panel repeater
+ * @param {boolean} props.toggle - The toggle state of the panel repeater
+ * @param {boolean} props.copy - The copy state of the panel repeater
+ * @param {boolean} props.delete - The delete state of the panel repeater
+ * @param {number} props.index - The index of the panel repeater
+ * @param {function} props.handleDelete - The function to handle deletion in the panel repeater
+ * @param {function} props.handleCopy - The function to handle copying in the panel repeater
+ * @returns {JSX.Element} React component
+ */
 export const PanelRepeater = (props) => {
   const {
     children,

@@ -6,6 +6,15 @@ import { Button, Dropdown, GradientPicker } from '@wordpress/components';
 import {  } from "@wordpress/block-editor"
 import { BButtonGroup } from '../BButtonGroup/BButtonGroup';
 import { useSelect } from '@wordpress/data';
+/**
+ * PanelCustomColorControl Component
+ * 
+ * @param {object} props - The props object
+ * @param {string} props.value - The value of the custom color control panel
+ * @param {function} props.onChange - The function to handle changes in the custom color control panel value
+ * @param {string} props.label - The label for the custom color control panel
+ * @returns {JSX.Element} React component
+ */
 
 export const PanelCustomColorControl = (props) => {
   const {

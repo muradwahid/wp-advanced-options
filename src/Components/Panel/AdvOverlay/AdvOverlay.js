@@ -21,7 +21,19 @@ const blendOptions = [
   { label: "Luminosity", value: "luminosity" },
 ];
 
-const AdvOverlay = ({ value, onChange,device }) => {
+/**
+ * AdvOverlay Component
+ * 
+ * @param {object} props - The props object
+ * @param {object} props.value - The value of the overlay
+ * @param {function} props.onChange - The function to handle changes in the overlay value
+ * @param {string} props.device - The device type (e.g., "desktop", "tablet", "mobile")
+ * @returns {JSX.Element} React component
+ */
+
+
+const AdvOverlay = (props) => {
+  const { value, onChange, device } = props;
   const [overlay, setOverlay] = useState(value || {
     isEnabled:false,
     colors:advBgOptions,

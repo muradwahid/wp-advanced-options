@@ -12,7 +12,18 @@ const overflowOptions = [
   { label: "Visible", value: "visible" },
   { label: "Scroll", value: "scroll" },
 ];
-const VisibilityOptions = ({ value, onChange, device="desktop" }) => {
+
+/**
+ * VisibilityOptions Component
+ * 
+ * @param {object} props - The props object
+ * @param {object} props.value - The value for visibility options
+ * @param {function} props.onChange - The function to handle changes in the visibility options
+ * @param {string} props.device - The device type
+ * @returns {JSX.Element} React component
+ */
+const VisibilityOptions = (props) => {
+  const { value, onChange, device = "desktop" } = props;
   const { zIndex, overflow = "default" } = value || {};
   return (
     <div>

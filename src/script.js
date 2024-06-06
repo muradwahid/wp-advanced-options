@@ -1,8 +1,7 @@
 import './style.scss';
 import { createRoot } from 'react-dom/client';
 // Block Name
-function FrontEnd({ attributes }) {
-  const { advanced } = attributes;
+function FrontEnd() {
   
 	return (
     <div>

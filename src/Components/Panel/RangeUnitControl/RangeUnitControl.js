@@ -1,16 +1,31 @@
 import { RangeControl } from "@wordpress/components";
 import React, { Fragment, useEffect, useRef, useState } from "react";
-const RangeUnitControl = ({
-  label,
-  units,
-  className,
-  style,
-  value = "0px",
-  min=0,
-  max=100,
-  onChange = () => {},
-  ...props
-}) => {
+/**
+ * RangeUnitControl Component
+ * 
+ * @param {object} props - The props object
+ * @param {string} props.label - The label for the range unit control
+ * @param {array} props.units - The units for the range unit control
+ * @param {string} props.className - The class name for the range unit control
+ * @param {object} props.style - The style object for the range unit control
+ * @param {string} props.value - The value of the range unit control
+ * @param {number} props.min - The minimum value for the range unit control
+ * @param {number} props.max - The maximum value for the range unit control
+ * @param {function} props.onChange - The function to handle changes in the range unit control value
+ * @returns {JSX.Element} React component
+ */
+const RangeUnitControl = (props) => {
+  const {
+    label,
+    units,
+    className,
+    style,
+    value = "0px",
+    min = 0,
+    max = 100,
+    onChange = () => { },
+    ...rest
+  } = props;
   const unitRef = useRef();
   const [toggle, setToggle] = useState(false);
   const defaults = [
@@ -22,16 +37,10 @@ const RangeUnitControl = ({
     { label: "vh", value: "vh" },
   ];
   const defaultUnits = defaults || units;
-  // const number = value
-  //   .split("")
-  //   .filter((char) => !isNaN(char) && char !== "%")
-  //   .join("");
+
   const number = parseInt(unit) || 0;
   const unit ="px" || value.slice(number.toString().length);
-  // const unit = value
-  //   .split("")
-  //   .filter((char) => isNaN(char) || char === "%")
-  //   .join("");
+
   const [currentNumber, setCurrentNumber] = useState(number);
   const [currentUnit, setCurrentUnit] = useState(unit);
   useEffect(() => {
@@ -50,12 +59,7 @@ const RangeUnitControl = ({
     };
   });
   const id = Math.floor(Math.random() * 999999);
-  // const wrapper = `#unitId-${id} .unitRangeWrapper`;
-  // const rangeWrapper = `${wrapper} .rangeControlWrapper`;
-  // const unitContainer = `${rangeWrapper} .unitControlWrapper`;
-  // const button = `${unitContainer} .unitControlBtn`;
-  // const unitWrapper = `${rangeWrapper} .unitListWrapper`;
-  // const unitList = `${rangeWrapper} .unitList`;
+
   return (
     <Fragment>
       <style>{`
@@ -132,7 +136,7 @@ const RangeUnitControl = ({
             <RangeControl
               value={currentNumber}
               onChange={(val) => setCurrentNumber(val)}
-              {...props}
+              {...rest}
               min={min}
               max={max}
             />

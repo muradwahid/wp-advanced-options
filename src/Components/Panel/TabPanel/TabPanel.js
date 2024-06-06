@@ -2,6 +2,15 @@ const { Dashicon } = wp.components;
 import React from 'react';
 import "./tabpanel.css";
 
+/**
+ * TabPanel Component
+ * 
+ * @param {object} props - The props object
+ * @param {string} props.value - The value of the tab panel
+ * @param {function} props.onChange - The function to handle changes in the tab panel value
+ * @returns {JSX.Element} React component
+ */
+
 export const TabPanel = (props) => {
   const { value, onChange = () => { } } = props;
   return (

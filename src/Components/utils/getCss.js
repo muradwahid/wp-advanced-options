@@ -1,40 +1,3 @@
-//get responsive css
-const getResponsiveCss = (desktop, tablet, mobile, id, isHover = false) => {
-  return `${
-    mobile
-      ? `@media only screen and (max-width: 640px) {
-    ${
-      isHover
-        ? `#${id}:hover{${mobile ? mobile : ""}}`
-        : `#${id}{${mobile ? mobile : ""}}`
-    }
-}`
-      : ""
-  }
-${
-  tablet
-    ? `@media only screen and (min-width:641px) and (max-width: 1024px) {
-      ${
-        isHover
-          ? `#${id}:hover{${tablet ? tablet : ""}}`
-          : `#${id}{${tablet ? tablet : ""}}`
-      }
-}`
-    : ""
-}
-${
-  desktop
-    ? `@media only screen and (min-width:1025px) {
-      ${
-        isHover
-          ? `#${id}:hover{${desktop ? desktop : ""}}`
-          : `#${id}{${desktop ? desktop : ""}}`
-      }
-}`
-    : ""
-}
-`;
-};
 
 //getBoxCss
 export const getBoxCss = (props, property) => {
@@ -276,7 +239,7 @@ export const getBorderShadowCSS = (props) => {
     //   border: getBorderCSS(normal?.border),
     //   shadow: `box-shadow:${getShadowCSS(normal?.shadow)};`,
     // },
-    hover: `getBorderCSS(hover?.border)
+    hover: `${getBorderCSS(hover?.border)}
     box-shadow:${getShadowCSS(hover?.shadow)};`
     // hover: {
     //   border: getBorderCSS(hover?.border),
@@ -319,20 +282,25 @@ export const getAdvancedCSS = (advanced, id) => {
     borderShadow,
     visibility,
     responsiveControl,
-    animation,
     customCss
   } = advanced || {};
   return `#${id}{
     position:relative;
     ${getObjKey(dimension) ? getDimensionCSS(dimension, "desktop") : ""}
-    ${getObjKey(background)? getBackgroundCSS(background).normal.background: ""}
+    ${
+      getObjKey(background)
+        ? getBackgroundCSS(background).normal.background
+        : ""
+    }
     ${getObjKey(background) ? getBackgroundCSS(background).normal.desktop : ""}
     ${getObjKey(borderShadow) ? getBorderShadowCSS(borderShadow).normal : ""}
     ${getObjKey(visibility) ? getVisibilityCSS(visibility).global : ""}
     ${getObjKey(visibility) ? getVisibilityCSS(visibility).desktop : ""}
-    ${getObjKey(responsiveControl) ? getResponsiveControl(responsiveControl).desktop : ""}
-  }
-  #${id}bpl{
+    ${
+      getObjKey(responsiveControl)
+        ? getResponsiveControl(responsiveControl).desktop
+        : ""
+    }
     ${
       getObjKey(background)
         ? `transition:background ${
@@ -342,7 +310,9 @@ export const getAdvancedCSS = (advanced, id) => {
     }
   }
   #${id}:hover{
-    ${getObjKey(background) ? getBackgroundCSS(background).hover.background : ""}
+    ${
+      getObjKey(background) ? getBackgroundCSS(background).hover.background : ""
+    }
     ${getObjKey(background) ? getBackgroundCSS(background).hover.desktop : ""}
     ${getObjKey(borderShadow) ? getBorderShadowCSS(borderShadow).hover : ""}
   }
@@ -385,7 +355,6 @@ export const getAdvancedCSS = (advanced, id) => {
         ? getResponsiveControl(responsiveControl).tablet
         : ""
     }}
-  }
   #${id}:hover{
     ${getObjKey(background) ? getBackgroundCSS(background).hover.tablet : ""}
   }
@@ -407,7 +376,6 @@ export const getAdvancedCSS = (advanced, id) => {
         ? getResponsiveControl(responsiveControl).mobile
         : ""
     }}
-  }
     #${id}:hover{
     ${getObjKey(background) ? getBackgroundCSS(background).hover.mobile : ""}
   }
@@ -423,4 +391,3 @@ export const getAdvancedCSS = (advanced, id) => {
     .replace(/\s+/g, " ")
     .trim();
 };
-

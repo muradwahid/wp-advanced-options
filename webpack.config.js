@@ -17,8 +17,8 @@ module.exports = (env, argv) => {
       // advanced: './src/advanced.js',
       // 'advanced-style': './src/advanced-style.js',
       script: "./src/script.js",
-      // "advanced-style": "./src/Components/AdvancedOptions/style.js",
-      "advanced-style": "./src/Components/AdvancedOptions/advancedStyle.js",
+      "advanced-style": "./src/Components/AdvancedOptions/style.js",
+      // "advanced-style": "./src/Components/AdvancedOptions/advancedStyle.js",
     },
     output: {
       filename: "[name].js",

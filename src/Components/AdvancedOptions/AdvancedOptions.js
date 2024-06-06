@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BBoxControl } from "../Panel/BBoxControl/BBoxControl";
 import { Device } from "../Panel/Device/Device";
 
 import { withSelect } from "@wordpress/data";
 
 import { PanelBody, RangeControl, ToggleControl } from "@wordpress/components";
-import AdvAnimation from "../Panel/AdvAnimation/AdvAnimation";
 import { AdvBackground } from "../Panel/AdvBackground/AdvBackground";
 import AdvOverlay from "../Panel/AdvOverlay/AdvOverlay";
 import BMultiShadowControl from "../Panel/BMultiShadowControl/BMultiShadowControl";
@@ -17,19 +16,37 @@ import { lowerCase } from "../utils/functions";
 import { unitOptions } from "../utils/options";
 import "./advancedOptionsStyle.css";
 
-const AdvancedOptions = ({
-  attributes,
-  setAttributes,
-  isDimension = true,
-  isBackground = true,
-  isOverlay = true,
-  isBorderShadow = true,
-  isVisibility = true,
-  isResponsive = true,
-  isAnimation = true,
-  isCustomCss = true,
-  device,
-}) => {
+/**
+ * AdvancedOptions component.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} [props.attributes] - Required
+ * @param {Function} [props.setAttributes] - Required
+ * @param {boolean} [props.isDimension] - Optional
+ * @param {boolean} [props.isBackground] - Optional
+ * @param {boolean} [props.isOverlay]  -Optional
+ * @param {boolean} [props.isBorderShadow]  -Optional
+ * @param {boolean} [props.isVisibility]  -Optional
+ * @param {boolean} [props.isResponsive]  -Optional
+ * @param {boolean} [props.isCustomCss]  -Optional
+ * @returns {JSX.Element}
+ */
+
+const AdvancedOptions = (props) => {
+  const {
+    attributes,
+    setAttributes,
+    isDimension = true,
+    isBackground = true,
+    isOverlay = true,
+    isBorderShadow = true,
+    isVisibility = true,
+    isResponsive = true,
+    // isAnimation = true,
+    isCustomCss = true,
+    device,
+  } = props;
   const { advanced } = attributes;
   const {
     dimension,
@@ -38,7 +55,6 @@ const AdvancedOptions = ({
     borderShadow,
     visibility,
     responsiveControl,
-    animation,
     customCss,
   } = advanced || {};
 
@@ -55,7 +71,6 @@ const AdvancedOptions = ({
               <div style={{ position: "relative" }}>
                 <Device
                   style={{ position: "absolute", right: "0px", top: "2px" }}
-                  onChange={val=>console.log(val)}
                 />
                 <BBoxControl
                   label="Margin"
@@ -266,7 +281,7 @@ const AdvancedOptions = ({
         )}
 
         {/* animation */}
-        {isAnimation && (
+        {/* {isAnimation && (
           <PanelBody
             title="Animation"
             initialOpen={false}
@@ -279,7 +294,7 @@ const AdvancedOptions = ({
               }
             />
           </PanelBody>
-        )}
+        )} */}
 
         {/* custom css */}
         {isCustomCss && (

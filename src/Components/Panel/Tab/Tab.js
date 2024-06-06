@@ -1,5 +1,16 @@
 import React from 'react';
 
+/**
+ * Tab Component
+ * 
+ * @param {object} props - The props object
+ * @param {array} props.options - The options for the tab component
+ * @param {function} props.onChange - The function to handle changes in the tab value
+ * @param {string} props.value - The value of the tab
+ * @param {number} props.paddingY - The vertical padding for the tab
+ * @param {number} props.paddingX - The horizontal padding for the tab
+ * @returns {JSX.Element} React component
+ */
 export const Tab = (props) => {
   const { options, onChange = () => { }, value, paddingY = 4, paddingX = 0 } = props;
   const id = Math.floor(Math.random() * 99999999);

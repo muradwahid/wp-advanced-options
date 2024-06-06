@@ -1,6 +1,22 @@
 import "./mediaArea.css";
 const { MediaUpload } = wp.blockEditor;
 
+/**
+ * MediaArea Component
+ * 
+ * @param {object} props - The props object
+ * @param {array} props.types - The allowed types for media upload
+ * @param {object} props.value - The value of the media area
+ * @param {function} props.onChange - The function to handle changes in the media area value
+ * @param {string} props.default - The default value for the media area
+ * @param {string} props.height - The height of the media area
+ * @param {string} props.width - The width of the media area
+ * @param {string} props.label - The label for the media area
+ * @param {object} props.style - The style object for the media area
+ * @param {string} props.className - The class name for the media area
+ * @returns {JSX.Element} React component
+ */
+
 export const MediaArea = (props) => {
   const {
     types = ['image'],

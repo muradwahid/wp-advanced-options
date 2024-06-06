@@ -4,6 +4,19 @@ import { Fragment } from "react";
 
 import "./style.css";
 
+/**
+ * Device Component
+ * 
+ * @param {object} props - The props object
+ * @param {object} props.style - The style object for the device component
+ * @param {string} props.className - The class name for the device component
+ * @param {(horizontal | vertical)} props.position - The position of the device component
+ * @param {function} props.onChange - The function to handle changes in the device type
+ * @returns {JSX.Element} React component
+ */
+
+
+
 export const Device = compose(
   withSelect((select) => {
     const {__experimentalGetPreviewDeviceType } =

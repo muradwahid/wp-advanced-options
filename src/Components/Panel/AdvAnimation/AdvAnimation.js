@@ -9,36 +9,42 @@ import { animationOptions } from "./options";
 // window["AOS"] = AOS;
 const AdvAnimation = ({ value, onChange }) => {
   const blockProps = useBlockProps();
-  // useEffect(() => { 
-  //   console.log(blockProps)
-  // },[])
   useEffect(() => {
     window["AOS"]?.init();
   }, []);
-  // useEffect(() => {
-  //   const parentId = blockProps.id;
+  useEffect(() => {
+    const parentId = blockProps.id;
 
-  //   const blockWrapper = document.querySelector(`#${parentId}`);
-  //   const animatedWrapper = blockWrapper.childNodes[0];
-  //   const animatedClassList = animatedWrapper?.classList;
-  //   if (animatedClassList) {
-  //     const transitionClass = Array.from(animatedClassList).filter((str) =>
-  //       /advBpl/.test(str)
-  //     )[0];
+    const animatedWrapper = document.querySelector(`#${parentId}`);
+    // const animatedWrapper = blockWrapper.childNodes[0];
+    const animatedClassList = animatedWrapper?.classList;
+    if (animatedClassList) {
+      animatedWrapper.setAttribute("data-aos", value.type);
+      animatedClassList.remove("aos-init");
+      animatedClassList.remove("aos-animate");
+      setTimeout(() => {
+        animatedClassList.add("aos-init");
+        animatedClassList.add("aos-animate");
+      }, 500);
+    }
+    if (!animatedClassList.contains("is-selected")) {
+      animatedClassList.add("aos-init");
+      animatedClassList.add("aos-animate");
+    }
+    observer.observe(animatedWrapper, { attributes: true })
+  }, [value.type]);
 
-  //     animatedClassList.remove(transitionClass);
-  //     animatedWrapper.setAttribute("data-aos", value.type);
-  //     animatedClassList.remove("aos-init");
-  //     animatedClassList.remove("aos-animate");
-  //     setTimeout(() => {
-  //       animatedClassList.add("aos-init");
-  //       animatedClassList.add("aos-animate");
-  //       setTimeout(() => {
-  //         // animatedClassList.add(transitionClass);
-  //       },600);
-  //     }, 500);
-  //   }
-  // }, [value.type, value.delay, value.speed]);
+  const observer = new MutationObserver(mutations => { 
+    mutations.map((mutation) => {
+      if (!mutation.target.classList.contains("is-selected")) {
+        mutation.target.classList.add("aos-init");
+        // mutation.target.classList.add("aos-animate");
+      }
+    })
+  })
+
+
+
 
   return (
     <div>

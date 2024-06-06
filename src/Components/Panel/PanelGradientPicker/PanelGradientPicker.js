@@ -1,6 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 const { Dropdown, GradientPicker } = wp.components;
+/**
+ * PanelGradientPicker Component
+ * 
+ * @param {object} props - The props object
+ * @param {string} props.value - The value of the gradient picker
+ * @param {function} props.onChange - The function to handle changes in the gradient picker value
+ * @param {string} props.label - The label for the gradient picker
+ * @returns {JSX.Element} React component
+ */
 
 export const PanelGradientPicker = ({ value, onChange = () => { }, label }) => {
   return (

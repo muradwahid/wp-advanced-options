@@ -6,7 +6,16 @@ const {
   Button,
   Dropdown,
   ToggleControl,
-  __experimentalUnitControl: UnitControl} = wp.components;
+  __experimentalUnitControl: UnitControl } = wp.components;
+  /**
+ * PanelSingleShadow Component
+ * 
+ * @param {object} props - The props object
+ * @param {string} props.value - The value of the single shadow
+ * @param {function} props.onChange - The function to handle changes in the single shadow value
+ * @param {string} props.label - The label for the single shadow
+ * @returns {JSX.Element} React component
+ */
 
 export const PanelSingleShadow = (props) => {
   const { value, onChange = () => { }, label } = props;

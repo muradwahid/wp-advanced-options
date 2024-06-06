@@ -21,12 +21,24 @@ import { MediaArea } from "../MediaArea/MediaArea";
 import { PanelCustomColorControl } from "../PanelCustomColorControl/PanelCustomColorControl";
 import { Tab } from "../Tab/Tab";
 
-export const AdvBackground = ({
-  name="Background",
-  value,
-  onChange = () => {},
-  device = "desktop",
-}) => {
+/**
+ * AdvBackground Component
+ * 
+ * @param {object} props - The props object
+ * @param {string} props.name - The name of the background
+ * @param {object} props.value - The value of the background
+ * @param {function} props.onChange - The function to handle changes in the background value
+ * @param {string} props.device - The device type (e.g., "desktop", "tablet", "mobile")
+ * @returns {JSX.Element} React component
+ */
+
+export const AdvBackground = (props) => {
+  const {
+    name = "Background",
+    value,
+    onChange = () => { },
+    device = "desktop",
+  } = props;
   const [bgValue, setBgValue] = useState(value || { hoverType: "normal" });
   const { transition } = bgValue[bgValue.hoverType] || {};
 

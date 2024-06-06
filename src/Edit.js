@@ -1,7 +1,9 @@
 import { InspectorControls } from "@wordpress/block-editor";
 import { useEffect } from "react";
 import { AdvancedOptions } from "./Components";
+window["AdvancedOptions"] = AdvancedOptions;
 
+const Advanced=window.AdvancedOptions;
 const Edit = (props) => {
   const { className, setAttributes, clientId, attributes } = props;
   const { cId } = attributes;
@@ -9,7 +11,6 @@ const Edit = (props) => {
     clientId && setAttributes({ cId: clientId.substring(0, 10) });
   }, [clientId]); // Set & Update clientId to cId
   const { advanced } = attributes;
-  const { customCss } = advanced;
   useEffect(() => {
     // console.log(advanced.overlay)
   }, [advanced.overlay]);
@@ -56,11 +57,7 @@ const Edit = (props) => {
         optio laudantium. Dolorum, voluptatum delectus.
       </p>
       <InspectorControls>
-        <AdvancedOptions
-          attributes={attributes}
-          setAttributes={setAttributes}
-          elId={elId}
-        />
+        <Advanced attributes={attributes} setAttributes={setAttributes} />
       </InspectorControls>
     </div>
   );

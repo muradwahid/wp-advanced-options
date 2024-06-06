@@ -1,7 +1,28 @@
 import { __experimentalUnitControl as UnitControl } from "@wordpress/components";
 import { useEffect, useState } from 'react';
 
-export const BBoxControl = ({ label, values, onChange = () => { }, resetValues, defaultValues, units, sides, style, className,disableUnits=false }) => {
+
+/**
+ * BBoxControl Component
+ * 
+ * @param {object} props - The props object
+ * @param {string} props.label - The label for the control
+ * @param {object} props.values - The values for the control
+ * @param {function} props.onChange - The function to handle changes in the control values
+ * @param {object} props.resetValues - The default values for resetting the control
+ * @param {object} props.defaultValues - The default values for the control
+ * @param {array} props.units - The units for the control
+ * @param {("top" | "right" | "bottom" | "left")[]} props.sides - The sides for the control
+ * @param {object} props.style - The style object for the control
+ * @param {string} props.className - The class name for the control
+ * @param {(true | false)} props.disableUnits - Flag to disable units
+ * @returns {JSX.Element} React component
+ */
+
+
+
+export const BBoxControl = (props) => {
+  const { label, values, onChange = () => { }, resetValues, defaultValues, units, sides, style, className, disableUnits = false } = props;
   const [link, setLink] = useState(true);
   // const [value, setValue] = useState(values || {});
 
