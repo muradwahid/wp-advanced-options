@@ -31,20 +31,17 @@ const AdvAnimation = ({ value, onChange }) => {
       animatedClassList.add("aos-init");
       animatedClassList.add("aos-animate");
     }
-    observer.observe(animatedWrapper, { attributes: true })
+    observer.observe(animatedWrapper, { attributes: true });
   }, [value.type]);
 
-  const observer = new MutationObserver(mutations => { 
+  const observer = new MutationObserver((mutations) => {
     mutations.map((mutation) => {
       if (!mutation.target.classList.contains("is-selected")) {
         mutation.target.classList.add("aos-init");
         // mutation.target.classList.add("aos-animate");
       }
-    })
-  })
-
-
-
+    });
+  });
 
   return (
     <div>
@@ -52,29 +49,11 @@ const AdvAnimation = ({ value, onChange }) => {
         <Label className="">Select Animation</Label>
       </div>
       <div className="advExtraMargin">
-        <SelectControl
-          value={value.type}
-          options={animationOptions}
-          onChange={(val) => onChange({ ...value, type: val })}
-        />
+        <SelectControl value={value.type} options={animationOptions} onChange={(val) => onChange({ ...value, type: val })} />
       </div>
-      <RangeControl
-        label="Animation Speed"
-        value={value.speed}
-        onChange={(val) => onChange({ ...value, speed: val })}
-        min={0}
-        max={5}
-        step={0.01}
-      />
+      <RangeControl label="Animation Speed" value={value.speed} onChange={(val) => onChange({ ...value, speed: val })} min={0} max={5} step={0.01} />
 
-      <RangeControl
-        label="Animation Delay"
-        value={value.delay}
-        onChange={(val) => onChange({ ...value, delay: val })}
-        min={0}
-        max={5}
-        step={0.01}
-      />
+      <RangeControl label="Animation Delay" value={value.delay} onChange={(val) => onChange({ ...value, delay: val })} min={0} max={5} step={0.01} />
     </div>
   );
 };

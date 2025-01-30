@@ -6,15 +6,15 @@ export const unitOptions = [
 
 export const imgPositionOptions = [
   { label: "Default", value: "default" },
-  { label: "Center Center", value: "center-center" },
-  { label: "Center Left", value: "center-left" },
-  { label: "Center Right", value: "center-right" },
-  { label: "Top Center", value: "center-top" },
-  { label: "Top Left", value: "left-top" },
-  { label: "Top Right", value: "left-bottom" },
-  { label: "Bottom Center", value: "right-center" },
-  { label: "Bottom Left", value: "right-top" },
-  { label: "Bottom Right", value: "right-bottom" },
+  { label: "Center Center", value: "center center" },
+  { label: "Center Left", value: "center left" },
+  { label: "Center Right", value: "center right" },
+  { label: "Top Center", value: "center top" },
+  { label: "Top Left", value: "left top" },
+  { label: "Top Right", value: "left bottom" },
+  { label: "Bottom Center", value: "right center" },
+  { label: "Bottom Left", value: "right top" },
+  { label: "Bottom Right", value: "right bottom" },
   { label: "Custom", value: "custom" },
 ];
 

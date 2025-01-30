@@ -1,9 +1,9 @@
 
 //getBoxCss
-export const getBoxCss = (props, property) => {
-  if (props) {
-    const result = Object.keys(props).map(
-      (key) => `${property}-${key}:${props[key]};`
+export const getBoxCss = (value, property) => {
+  if (value) {
+    const result = Object.keys(value).map(
+      (key) => `${property}-${key}:${value[key]};`
     );
     return result.join(" ");
   }
@@ -326,15 +326,7 @@ export const getAdvancedCSS = (advanced, id) => {
     ${getObjKey(overlay) ? getOverlayCSS(overlay).blend : ""}
     ${getObjKey(overlay) ? getOverlayCSS(overlay).filter : ""}
     ${getObjKey(overlay) ? getOverlayCSS(overlay).opacity : ""}
-    ${
-      getObjKey(overlay)
-        ? `transition:background ${
-            getOverlayCSS(overlay).transition
-          }s, opacity ${getOverlayCSS(overlay).transition}s, filter ${
-            getOverlayCSS(overlay).transition
-          }s;`
-        : ""
-    }
+    ${getObjKey(overlay)? `transition:background ${getOverlayCSS(overlay).transition}s;`: ""}
   }
   #${id}:hover::after{
     content:"";

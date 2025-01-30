@@ -121,6 +121,7 @@ const observer = new MutationObserver((mutations) => {
   });
 });
 
+
 //animation attribute observer
 const animationAttr = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
@@ -172,7 +173,7 @@ const animationObserver = new MutationObserver((mutations) => {
               element.hasAttribute("data-bblocks-advanced") &&
               element.hasAttribute("data-aos")
             ) {
-              animationAttr.observe(element, { attributes: true });
+              animationAttr.observe(element, { attributes: true});
             }
           });
         }

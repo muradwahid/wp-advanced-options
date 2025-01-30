@@ -15,6 +15,7 @@ import VisibilityOptions from "../Panel/VisibilityOptions/VisibilityOptions";
 import { lowerCase } from "../utils/functions";
 import { unitOptions } from "../utils/options";
 import "./advancedOptionsStyle.css";
+import AdvAnimation from "../Panel/AdvAnimation/AdvAnimation";
 
 /**
  * AdvancedOptions component.
@@ -43,20 +44,12 @@ const AdvancedOptions = (props) => {
     isBorderShadow = true,
     isVisibility = true,
     isResponsive = true,
-    // isAnimation = true,
+    isAnimation = true,
     isCustomCss = true,
     device,
   } = props;
   const { advanced } = attributes;
-  const {
-    dimension,
-    background,
-    overlay,
-    borderShadow,
-    visibility,
-    responsiveControl,
-    customCss,
-  } = advanced || {};
+  const { dimension, background, overlay, borderShadow, visibility, responsiveControl, customCss, animation } = advanced || {};
 
   useEffect(() => {
     // console.log(borderShadow);
@@ -69,9 +62,7 @@ const AdvancedOptions = (props) => {
           <PanelBody title="Margin & Padding" initialOpen={false}>
             <div>
               <div style={{ position: "relative" }}>
-                <Device
-                  style={{ position: "absolute", right: "0px", top: "2px" }}
-                />
+                <Device style={{ position: "absolute", right: "0px", top: "2px" }} />
                 <BBoxControl
                   label="Margin"
                   units={unitOptions}
@@ -90,9 +81,7 @@ const AdvancedOptions = (props) => {
                 />
               </div>
               <div style={{ position: "relative" }}>
-                <Device
-                  style={{ position: "absolute", right: "0px", top: "2px" }}
-                />
+                <Device style={{ position: "absolute", right: "0px", top: "2px" }} />
                 <BBoxControl
                   label="Padding"
                   units={unitOptions}
@@ -115,38 +104,22 @@ const AdvancedOptions = (props) => {
         )}
         {/* background */}
         {isBackground && (
-          <PanelBody
-            title="Background"
-            className="bPlAdvPanelBody"
-            initialOpen={false}
-          >
+          <PanelBody title="Background" className="bPlAdvPanelBody" initialOpen={false}>
             <AdvBackground
               value={background || {}}
               device={device}
-              onChange={(val) =>
-                setAttributes({ advanced: { ...advanced, background: val } })
-              }
+              onChange={(val) => setAttributes({ advanced: { ...advanced, background: val } })}
             />
             <br />
             {isOverlay && (
-              <AdvOverlay
-                value={overlay || {}}
-                device={device}
-                onChange={(val) =>
-                  setAttributes({ advanced: { ...advanced, overlay: val } })
-                }
-              />
+              <AdvOverlay value={overlay || {}} device={device} onChange={(val) => setAttributes({ advanced: { ...advanced, overlay: val } })} />
             )}
           </PanelBody>
         )}
 
         {/* border and shadow */}
         {isBorderShadow && (
-          <PanelBody
-            title="Border & Shadow"
-            initialOpen={false}
-            className="bPlAdvPanelBody"
-          >
+          <PanelBody title="Border & Shadow" initialOpen={false} className="bPlAdvPanelBody">
             <Tab
               options={["normal", "hover"]}
               value={borderShadow.type}
@@ -221,23 +194,13 @@ const AdvancedOptions = (props) => {
         {/* visibility options */}
         {isVisibility && (
           <PanelBody title="Visibility Options" initialOpen={false}>
-            <VisibilityOptions
-              value={visibility}
-              device={device}
-              onChange={(val) =>
-                setAttributes({ advanced: { ...advanced, visibility: val } })
-              }
-            />
+            <VisibilityOptions value={visibility} device={device} onChange={(val) => setAttributes({ advanced: { ...advanced, visibility: val } })} />
           </PanelBody>
         )}
 
         {/* responsive control */}
         {isResponsive && (
-          <PanelBody
-            title="Responsive Control"
-            initialOpen={false}
-            className="bPlAdvPanelBody"
-          >
+          <PanelBody title="Responsive Control" initialOpen={false} className="bPlAdvPanelBody">
             <ToggleControl
               label="Hide on Desktop"
               value={responsiveControl?.desktop}
@@ -281,30 +244,16 @@ const AdvancedOptions = (props) => {
         )}
 
         {/* animation */}
-        {/* {isAnimation && (
-          <PanelBody
-            title="Animation"
-            initialOpen={false}
-            className="bPlAdvPanelBody"
-          >
-            <AdvAnimation
-              value={animation}
-              onChange={(val) =>
-                setAttributes({ advanced: { ...advanced, animation: val } })
-              }
-            />
+        {/* {isAnimation && ( */}
+          <PanelBody title="Animation" initialOpen={false} className="bPlAdvPanelBody">
+            <AdvAnimation value={animation} onChange={(val) => setAttributes({ advanced: { ...advanced, animation: val } })} />
           </PanelBody>
-        )} */}
+        {/* )} */}
 
         {/* custom css */}
         {isCustomCss && (
           <PanelBody title="Custom CSS" initialOpen={false}>
-            <CustomCodeEditor
-              value={customCss}
-              onChange={(val) =>
-                setAttributes({ advanced: { ...advanced, customCss: val } })
-              }
-            />
+            <CustomCodeEditor value={customCss} onChange={(val) => setAttributes({ advanced: { ...advanced, customCss: val } })} />
           </PanelBody>
         )}
       </div>
@@ -314,8 +263,6 @@ const AdvancedOptions = (props) => {
 
 export default withSelect((select) => {
   return {
-    device: lowerCase(
-      select("core/edit-post").__experimentalGetPreviewDeviceType()
-    ),
+    device: lowerCase(select("core/edit-post").__experimentalGetPreviewDeviceType()),
   };
 })(AdvancedOptions);

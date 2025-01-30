@@ -22,9 +22,9 @@
           },
           "img": {
             "url": "",
-            "desktop": { "position": "" },
-            "tablet": { "position": "" },
-            "mobile": { "position": "" }
+            "desktop": { "position": "","repeat":"no-repeat" },
+            "tablet": { "position": "", "repeat": "no-repeat" },
+            "mobile": { "position": "", "repeat": "no-repeat" }
           }
         },
         "hover": {

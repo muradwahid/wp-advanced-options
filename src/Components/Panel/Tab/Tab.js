@@ -12,50 +12,52 @@ import React from 'react';
  * @returns {JSX.Element} React component
  */
 export const Tab = (props) => {
-  const { options, onChange = () => { }, value, paddingY = 4, paddingX = 0 } = props;
+  const { options, onChange = () => { }, value, paddingY = 4, paddingX = 0, borderColor = "#4527a4", hoverColor = "#4527a4", activeColor = "#4527a4",color="#fff" } = props;
   const id = Math.floor(Math.random() * 99999999);
   return (
     <>
       <style>
         {`
-          .includeExclude {
+          #bpl-tab-${id}.bpl-tab {
             display: flex;
             justify-content: space-between;
-            border: 1px solid #ccc;
+            border: 1px solid ${borderColor};
             margin:8px 0px;
           }
-          .isActive-include {
-            background: #d7d7d7;
+          #bpl-tab-${id} .dynamic-${id}.isActive {
+            background: ${activeColor};
+            color: ${color};
           }
-          .single-includeExclude {
+          #bpl-tab-${id} .dynamic-${id}.single-bpl-tab {
             display: flex;
             width: 100%;
             justify-content: center;
             transition: background 0.2s ease-in-out;
             cursor: pointer;
             white-space:nowrap;
-            border-right: 1px solid #d7d7d7;
+            border-right: 1px solid ${borderColor};
           }
-          .single-includeExclude:last-child{
+          #bpl-tab-${id} .single-bpl-tab:last-child{
             border-right:0px
           }
-          .dynamic-${id}.single-includeExclude p {
+          #bpl-tab-${id} .dynamic-${id}.single-bpl-tab p {
               margin: 0;
               padding: ${paddingY}px ${paddingX}px;
             }
-          .single-includeExclude-hover:hover {
-            background: #ebebeb;
+          #bpl-tab-${id} .single-bpl-tab-hover:hover {
+            background: ${hoverColor};
+            color: ${color};
           }
-          `}
+        `}
       </style>
-      <div className="includeExclude">
+      <div id={`bpl-tab-${id}`} className="bpl-tab">
         {options?.map((option, i) => (
           <div
             key={i}
             onClick={() => onChange(option.replace(/\s/g, "").toLowerCase())}
-            className={`dynamic-${id} single-includeExclude ${value === option.replace(/\s/g, "").toLowerCase()
-              ? 'isActive-include'
-              : 'single-includeExclude-hover'
+            className={`dynamic-${id} single-bpl-tab ${value === option.replace(/\s/g, "").toLowerCase()
+              ? 'isActive'
+              : 'single-bpl-tab-hover'
               }`}
           >
             <p style={{ textTransform: 'capitalize' }}>{option}</p>

@@ -1,9 +1,10 @@
 import { InspectorControls } from "@wordpress/block-editor";
 import { useEffect } from "react";
 import { AdvancedOptions } from "./Components";
+import { getAdvancedCSS } from "./Components/utils/getCss";
 window["AdvancedOptions"] = AdvancedOptions;
 
-const Advanced=window.AdvancedOptions;
+const Advanced = window.AdvancedOptions;
 const Edit = (props) => {
   const { className, setAttributes, clientId, attributes } = props;
   const { cId } = attributes;
@@ -14,7 +15,6 @@ const Edit = (props) => {
   useEffect(() => {
     // console.log(advanced.overlay)
   }, [advanced.overlay]);
-
   // console.log({background:attributes.advanced.background});
 
   // useEffect(() => {
@@ -42,19 +42,12 @@ const Edit = (props) => {
 
   const elId = `hbHelloBlock-${cId}`;
   return (
-    <div
-      className={className}
-      id={elId}
-      data-bblocks-advanced={JSON.stringify(attributes.advanced)}
-    >
-      {/* <style>{`${getAdvancedCSS(advanced, "hbHelloBlock-123456").replace(/\s+/g, " ").trim()}`}</style> */}
+    <div className={className} id={elId} data-bblocks-advanced={JSON.stringify(attributes.advanced)}>
+      <style>{`${getAdvancedCSS(advanced, elId).replace(/\s+/g, " ").trim()}`}</style>
       {/* <style>{`${getAdvancedCSS(advanced, "hbHelloBlock-123456")}`}</style> */}
-
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur
-        libero expedita soluta, porro voluptatum facilis quisquam similique in
-        deserunt temporibus architecto praesentium odio repellendus cupiditate,
-        optio laudantium. Dolorum, voluptatum delectus.
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur libero expedita soluta, porro voluptatum facilis quisquam similique in
+        deserunt temporibus architecto praesentium odio repellendus cupiditate, optio laudantium. Dolorum, voluptatum delectus.
       </p>
       <InspectorControls>
         <Advanced attributes={attributes} setAttributes={setAttributes} />

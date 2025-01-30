@@ -5,7 +5,7 @@ import {
   __experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import { produce } from "immer";
-import { Fragment, useState,useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   advGradientOptions,
   imgAttachmentOptions,
@@ -87,7 +87,10 @@ export const AdvBackground = (props) => {
           <Background
             name={name}
             value={bgValue.hover}
-            onChange={(val) => setBgValue({ ...bgValue, hover: val })}
+            onChange={(val) => {
+              setBgValue({ ...bgValue, hover: val })
+              onChange({ ...bgValue, hover: val })
+            }}
             device={device}
           />
         </Fragment>
@@ -97,7 +100,10 @@ export const AdvBackground = (props) => {
           <Background
             name={name}
             value={bgValue.normal}
-            onChange={(val) => setBgValue({ ...bgValue, normal: val })}
+            onChange={(val) => {
+              setBgValue({ ...bgValue, normal: val })
+              onChange({ ...bgValue, normal: val })
+            }}
             device={device}
           />
         </Fragment>
@@ -106,7 +112,7 @@ export const AdvBackground = (props) => {
   );
 };
 
-const Background = ({ name,value, onChange, device }) => {
+const Background = ({ name, value, onChange, device }) => {
   const [bgValue, setBgValue] = useState(
     value || {
       type: "color",
@@ -144,10 +150,7 @@ const Background = ({ name,value, onChange, device }) => {
       },
     }
   );
-
-
-
-  const { type, color, gradient, img } =value || bgValue || {};
+  const { type, color, gradient, img } = value || bgValue || {};
   const {
     position,
     xPosition,
@@ -163,7 +166,7 @@ const Background = ({ name,value, onChange, device }) => {
         draft[property][secondP][thirdP] = value;
       } else if (property && secondP) {
         draft[property][secondP] = value;
-      }else{
+      } else {
         draft[property] = value;
       }
     });
@@ -171,7 +174,7 @@ const Background = ({ name,value, onChange, device }) => {
     onChange(newBG);
   };
 
-  useEffect(() =>onChange(bgValue),[bgValue])
+  useEffect(() => onChange(bgValue), [bgValue])
 
   return (
     <Fragment>
@@ -181,19 +184,22 @@ const Background = ({ name,value, onChange, device }) => {
       <Tab
         options={["Color", "Gradient", "Image"]}
         value={type}
-        onChange={(val) => updateBG("type", val)}
+        // onChange={(val) => updateBG("type", val)}
+        onChange={(val) => onChange({ ...value, type: val })}
       />
       {type === "color" && (
         <PanelCustomColorControl
           label={`${name} Color`}
           value={color}
-          onChange={(val) => updateBG("color", val)}
+          // onChange={(val) => updateBG("color", val)}
+          onChange={(val) => onChange({ ...value, color: val })}
         />
       )}
       {type === "gradient" && (
         <BGradient
           value={gradient}
-          onChange={(val) => updateBG("gradient", val)}
+          // onChange={(val) => updateBG("gradient", val)}
+          onChange={(val) => onChange({ ...value, gradient: val })}
         />
       )}
       {type === "image" && (
@@ -221,9 +227,10 @@ const Background = ({ name,value, onChange, device }) => {
                 <SelectControl
                   value={position}
                   options={imgPositionOptions}
-                  onChange={(val) =>
-                    updateBG("img", { ...img[device], position: val }, device)
-                  }
+                  // onChange={(val) =>
+                  //   updateBG("img", { ...img[device], position: val }, device)
+                  // }
+                  onChange={val => onChange({ ...value, img: { ...img, [device]: { ...img[device], position: val } } })}
                 />
               </div>
 
@@ -238,13 +245,14 @@ const Background = ({ name,value, onChange, device }) => {
                     value={xPosition}
                     min={-2000}
                     max={2000}
-                    onChange={(val) =>
-                      updateBG(
-                        "img",
-                        { ...img[device], xPosition: val },
-                        device
-                      )
-                    }
+                    // onChange={(val) =>
+                    //   updateBG(
+                    //     "img",
+                    //     { ...img[device], xPosition: val },
+                    //     device
+                    //   )
+                    // }
+                    onChange={val => onChange({ ...value, img: { ...img, [device]: { ...img[device], xPosition: val } } })}
                   />
 
                   <Flex className="mt20 mb5" gap={4} align="center">
@@ -257,13 +265,14 @@ const Background = ({ name,value, onChange, device }) => {
                       value={yPosition}
                       min={-2000}
                       max={2000}
-                      onChange={(val) =>
-                        updateBG(
-                          "img",
-                          { ...img[device], yPosition: val },
-                          device
-                        )
-                      }
+                      // onChange={(val) =>
+                      //   updateBG(
+                      //     "img",
+                      //     { ...img[device], yPosition: val },
+                      //     device
+                      //   )
+                      // }
+                      onChange={val => onChange({ ...value, img: { ...img, [device]: { ...img[device], yPosition: val } } })}
                     />
                   </div>
                 </Fragment>
@@ -277,9 +286,10 @@ const Background = ({ name,value, onChange, device }) => {
                 <SelectControl
                   value={attachment}
                   options={imgAttachmentOptions}
-                  onChange={(val) =>
-                    updateBG("img", { ...img[device], attachment: val }, device)
-                  }
+                  // onChange={(val) =>
+                  //   updateBG("img", { ...img[device], attachment: val }, device)
+                  // }
+                  onChange={val => onChange({ ...value, img: { ...img, [device]: { ...img[device], attachment: val } } })}
                 />
               </div>
 
@@ -291,23 +301,25 @@ const Background = ({ name,value, onChange, device }) => {
                 <SelectControl
                   value={repeat}
                   options={imgRepeatOptions}
-                  onChange={(val) =>
-                    updateBG("img", { ...img[device], repeat: val }, device)
-                  }
+                  // onChange={(val) =>
+                  //   updateBG("img", { ...img[device], repeat: val }, device)
+                  // }
+                  onChange={val => onChange({ ...value, img: { ...img, [device]: { ...img[device], repeat: val } } })}
                 />
               </div>
 
               <Flex className="mt20 mb5" gap={4} align="center">
-                <Label className="">Repeat</Label>
+                <Label className="">Size</Label>
                 <Device />
               </Flex>
               <div className="advExtraMargin">
                 <SelectControl
                   value={size}
                   options={imgSizeOptions}
-                  onChange={(val) =>
-                    updateBG("img", { ...img[device], size: val }, device)
-                  }
+                  // onChange={(val) =>
+                  //   updateBG("img", { ...img[device], size: val }, device)
+                  // }
+                  onChange={val => onChange({ ...value, img: { ...img, [device]: { ...img[device], size: val } } })}
                 />
               </div>
               {size === "custom" && (
@@ -321,13 +333,14 @@ const Background = ({ name,value, onChange, device }) => {
                     value={customSize}
                     min={-2000}
                     max={2000}
-                    onChange={(val) =>
-                      updateBG(
-                        "img",
-                        { ...img[device], customSize: val },
-                        device
-                      )
-                    }
+                    // onChange={(val) =>
+                    //   updateBG(
+                    //     "img",
+                    //     { ...img[device], customSize: val },
+                    //     device
+                    //   )
+                    // }
+                    onChange={val => onChange({ ...value, img: { ...img, [device]: { ...img[device], customSize: val } } })}
                   />
                 </Fragment>
               )}
